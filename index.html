@@ -8,12 +8,48 @@
 </head>
 <body>
     <!-- Contenedor del fondo animado (Nubes) -->
-    <div class="nubes-fondo"></div>
+    <div class="nubes-fondo" id="nubes-container"></div>
 
     <!-- Contenedor del personaje (Video) -->
     <div class="personaje-contenedor">
         <!-- 'autoplay', 'loop', 'muted' y 'playsinline' aseguran que se reproduzca solo -->
         <video src="cayendo.mp4" class="personaje-video" autoplay loop muted playsinline></video>
     </div>
+
+    <script>
+        const nubesContainer = document.getElementById('nubes-container');
+
+        function crearNube() {
+            const nube = document.createElement('div');
+            nube.classList.add('nube');
+
+            // Tamaño aleatorio (escala de 0.5 a 1.5)
+            const escala = Math.random() * 1 + 0.5;
+            nube.style.transform = `scale(${escala})`;
+
+            // Posición horizontal aleatoria (0% a 100%)
+            const left = Math.random() * 100;
+            nube.style.left = `${left}%`;
+
+            // Velocidad aleatoria (3s a 8s)
+            const duracion = Math.random() * 5 + 3;
+            nube.style.animationDuration = `${duracion}s`;
+
+            nubesContainer.appendChild(nube);
+
+            // Eliminar la nube cuando termina su animación
+            setTimeout(() => {
+                nube.remove();
+            }, duracion * 1000);
+        }
+
+        // Crear nubes periódicamente
+        setInterval(crearNube, 800);
+
+        // Crear algunas nubes iniciales con diferentes delays para que no empiecen todas abajo
+        for(let i=0; i<5; i++) {
+            setTimeout(crearNube, i * 400);
+        }
+    </script>
 </body>
 </html>

@@ -23,23 +23,31 @@ body, html {
     left: 0;
     width: 100%;
     height: 50%;
-
-    background-image: url('nubes.png');
-    background-repeat: repeat;
-    /* Maintain original aspect ratio, size depends on original image 677x369. Scaled to 600 width, height becomes ~327. */
-    background-size: 600px 327px;
-
-    /* Animación lineal infinita */
-    animation: desplazarNubes 5s linear infinite;
-    z-index: 1;
+    overflow: hidden;
+    /* Z-index 3 to be IN FRONT of the video which is z-index 2 */
+    z-index: 3;
+    pointer-events: none; /* Make sure clouds don't block clicks if needed later */
 }
 
-@keyframes desplazarNubes {
+.nube {
+    position: absolute;
+    width: 300px;
+    height: 160px; /* Based roughly on the aspect ratio of 677x369 */
+    background-image: url('nubes.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Start at the bottom of the nubes-fondo container and animate to the top */
+    top: 100%;
+    animation: flotarNube linear forwards;
+}
+
+@keyframes flotarNube {
     from {
-        background-position-y: 0px;
+        top: 100%;
     }
     to {
-        background-position-y: -327px; /* Must perfectly match the height of background-size for smooth tiling */
+        top: -200px; /* Moves completely out of the container */
     }
 }
 
