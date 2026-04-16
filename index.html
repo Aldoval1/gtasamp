@@ -196,7 +196,6 @@
 
         // Intentar iniciar la música inmediatamente al cargar la página
         window.addEventListener('DOMContentLoaded', () => {
-            selectorIdioma.dispatchEvent(new Event('change'));
             bgMusic.play().catch(e => {
                 console.log('El navegador bloqueó el autoplay sin interacción previa:', e);
                 // Si el navegador lo bloquea, se reproducirá al hacer el primer click
