@@ -169,9 +169,15 @@
 
         btnPlay.addEventListener('click', () => {
             playClickSound();
+            tituloJuego.classList.remove('fade-in-ui');
+            botonesContenedor.classList.remove('fade-in-ui');
+            nubesContainer.classList.remove('fade-in-ui');
+
             tituloJuego.classList.add('fade-out');
             botonesContenedor.classList.add('fade-out');
             nubesContainer.classList.add('fade-out');
+
+            personajeVideo.classList.remove('zoom-camara-reversa');
             personajeVideo.classList.add('zoom-camara');
 
             setTimeout(() => {
@@ -183,10 +189,17 @@
         btnCerrarTutorial.addEventListener('click', () => {
             playClickSound();
             modalTutorial.classList.remove('mostrar');
+
             personajeVideo.classList.remove('zoom-camara');
+            personajeVideo.classList.add('zoom-camara-reversa');
+
             tituloJuego.classList.remove('fade-out');
             botonesContenedor.classList.remove('fade-out');
             nubesContainer.classList.remove('fade-out');
+
+            tituloJuego.classList.add('fade-in-ui');
+            botonesContenedor.classList.add('fade-in-ui');
+            nubesContainer.classList.add('fade-in-ui');
         });
 
         // Configurar volumen de la música
