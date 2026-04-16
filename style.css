@@ -127,7 +127,7 @@ body, html {
 .botones-contenedor {
     position: absolute;
     bottom: 15%; /* Colocado en la parte inferior, debajo del personaje */
-    left: 50%;
+    left: 45%;
     transform: translateX(-50%);
     z-index: 4; /* Delante de las nubes y el video */
 
@@ -143,7 +143,7 @@ body, html {
 }
 
 .boton-juego {
-    width: 80px; /* Tamaño base, ajusta según sea necesario */
+    width: 120px; /* Tamaño base, ajusta según sea necesario */
     height: auto;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -161,6 +161,6 @@ body, html {
         gap: 20px;
     }
     .boton-juego {
-        width: 60px;
+        width: 90px;
     }
 }
