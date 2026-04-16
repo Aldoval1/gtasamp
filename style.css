@@ -338,9 +338,11 @@ input[type=range]::-webkit-slider-thumb {
 @keyframes zoomYDesplazamiento {
     0% {
         transform: translate(0, 0) scale(1);
+        transform-origin: center center;
     }
     100% {
-        transform: translate(-50%, -50%) scale(3) translate(30%, 5%);
+        transform: translate(15%, 15%) scale(3);
+        transform-origin: center center;
     }
 }
 
