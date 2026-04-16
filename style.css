@@ -329,10 +329,15 @@ input[type=range]::-webkit-slider-thumb {
     pointer-events: none;
 }
 
+
 .zoom-camara {
     /* Mantiene el personaje centrado mientras hace zoom (scale) y se mueve a la derecha (translate X positivo),
        lo que da la ilusión de que la cámara se mueve a la izquierda. */
     animation: zoomYDesplazamiento 2s forwards ease-in-out;
+}
+
+.zoom-camara-reversa {
+    animation: zoomYDesplazamientoReversa 2s forwards ease-in-out;
 }
 
 @keyframes zoomYDesplazamiento {
@@ -344,6 +349,27 @@ input[type=range]::-webkit-slider-thumb {
         transform: translate(15%, 15%) scale(3);
         transform-origin: center center;
     }
+}
+
+@keyframes zoomYDesplazamientoReversa {
+    0% {
+        transform: translate(15%, 15%) scale(3);
+        transform-origin: center center;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        transform-origin: center center;
+    }
+}
+
+.fade-in-ui {
+    animation: fadeInAnim 1s ease forwards !important;
+    pointer-events: auto !important;
+}
+
+@keyframes fadeInAnim {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modal-izquierda {
