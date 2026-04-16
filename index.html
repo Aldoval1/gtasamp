@@ -25,7 +25,7 @@
 </div>
 <!-- Contenedor de Botones -->
 <div class="botones-contenedor">
-<img alt="Play" class="boton-juego" src="playbutton.png"/>
+<img alt="Play" class="boton-juego" id="btn-play" src="playbutton.png"/>
 <img alt="Settings" class="boton-juego" id="btn-settings" src="settingbutton.png"/>
 </div>
 <!-- Modal de Ajustes -->
@@ -49,7 +49,19 @@
 </div>
 </div>
 </div>
+
+<!-- Modal de Tutorial -->
+<div class="modal-oculto modal-izquierda" id="modal-tutorial">
+<div class="modal-contenido">
+<h2 class="titulo-settings" id="titulo-tutorial">¿Quieres ver el tutorial?</h2>
+<div class="opciones-settings">
+<button class="selector-idioma btn-opcion" id="btn-tutorial-si">Sí</button>
+<button class="selector-idioma btn-opcion" id="btn-tutorial-no">No</button>
+</div>
+</div>
+</div>
 <script>
+
         const nubesContainer = document.getElementById('nubes-container');
 
         function crearNube() {
@@ -109,21 +121,36 @@
 
         // Textos para internacionalización
         const textos = {
-            en: {
+                        en: {
                 tituloSettings: 'Settings',
                 labelMusica: 'Music Volume',
-                labelIdioma: 'Language'
+                labelIdioma: 'Language',
+                tituloTutorial: 'Do you want to see the tutorial?',
+                btnSi: 'Yes',
+                btnNo: 'No'
             },
-            es: {
+                        es: {
                 tituloSettings: 'Ajustes',
                 labelMusica: 'Volumen Música',
-                labelIdioma: 'Idioma'
+                labelIdioma: 'Idioma',
+                tituloTutorial: '¿Quieres ver el tutorial?',
+                btnSi: 'Sí',
+                btnNo: 'No'
             }
         };
 
         const titleSettingsEl = document.querySelector('.titulo-settings');
         const labelMusicaEl = document.getElementById('label-musica');
         const labelIdiomaEl = document.getElementById('label-idioma');
+        const tituloTutorialEl = document.getElementById('titulo-tutorial');
+        const btnTutorialSiEl = document.getElementById('btn-tutorial-si');
+        const btnTutorialNoEl = document.getElementById('btn-tutorial-no');
+        const btnPlay = document.getElementById('btn-play');
+        const modalTutorial = document.getElementById('modal-tutorial');
+        const tituloJuego = document.querySelector('.titulo-juego');
+        const botonesContenedor = document.querySelector('.botones-contenedor');
+        const personajeVideo = document.querySelector('.personaje-video');
+
 
         // Función para reproducir sonido de click
         function playClickSound() {
@@ -137,6 +164,19 @@
             btn.addEventListener('click', playClickSound);
         });
 
+
+        btnPlay.addEventListener('click', () => {
+            playClickSound();
+            tituloJuego.classList.add('fade-out');
+            botonesContenedor.classList.add('fade-out');
+            nubesContainer.classList.add('fade-out');
+            personajeVideo.classList.add('zoom-camara');
+
+            setTimeout(() => {
+                modalTutorial.classList.add('mostrar');
+            }, 2000);
+        });
+
         // Configurar volumen de la música
         bgMusic.volume = sliderVolumen.value;
         sliderVolumen.addEventListener('input', (e) => {
@@ -144,11 +184,14 @@
         });
 
         // Configurar cambio de idioma
-        selectorIdioma.addEventListener('change', (e) => {
+                selectorIdioma.addEventListener('change', (e) => {
             const idioma = e.target.value;
             titleSettingsEl.textContent = textos[idioma].tituloSettings;
             labelMusicaEl.textContent = textos[idioma].labelMusica;
             labelIdiomaEl.textContent = textos[idioma].labelIdioma;
+            if (tituloTutorialEl) tituloTutorialEl.textContent = textos[idioma].tituloTutorial;
+            if (btnTutorialSiEl) btnTutorialSiEl.textContent = textos[idioma].btnSi;
+            if (btnTutorialNoEl) btnTutorialNoEl.textContent = textos[idioma].btnNo;
         });
 
         // Intentar iniciar la música inmediatamente al cargar la página
