@@ -54,12 +54,16 @@
 
 <!-- Modal de Tutorial -->
 <div class="modal-oculto modal-izquierda" id="modal-tutorial">
-<div class="modal-contenido">
+<div class="modal-contenido" id="modal-contenido-tutorial">
 <div class="btn-cerrar" id="btn-cerrar-tutorial">X</div>
-<h2 class="titulo-settings" id="titulo-tutorial">¿Quieres ver el tutorial?</h2>
-<div class="opciones-settings">
+<h2 class="titulo-settings transicionable" id="titulo-tutorial">¿Quieres ver el tutorial?</h2>
+<div class="opciones-settings transicionable" id="opciones-tutorial">
 <button class="selector-idioma btn-opcion" id="btn-tutorial-si">Sí</button>
 <button class="selector-idioma btn-opcion" id="btn-tutorial-no">No</button>
+</div>
+<div class="tutorial-navegacion" id="tutorial-nav">
+<div class="boton-nav" id="btn-nav-izq">&lt;</div>
+<div class="boton-nav" id="btn-nav-der">&gt;</div>
 </div>
 </div>
 </div>
@@ -188,10 +192,35 @@
         });
 
 
+        const modalContenidoTutorial = document.getElementById('modal-contenido-tutorial');
+        const transicionables = document.querySelectorAll('.transicionable');
+        const tutorialNav = document.getElementById('tutorial-nav');
+
+        btnTutorialSiEl.addEventListener('click', () => {
+            playClickSound();
+            // Expandir modal al centro
+            modalTutorial.classList.add('modal-expandido');
+
+            // Ocultar texto y botones actuales
+            transicionables.forEach(el => el.classList.add('ocultar-suave'));
+
+            // Mostrar flechas de navegación
+            tutorialNav.classList.add('mostrar');
+
+            // Empujar el video a la izquierda
+            personajeVideo.classList.remove('zoom-camara');
+            personajeVideo.classList.add('empujado-izquierda');
+        });
+
         btnCerrarTutorial.addEventListener('click', () => {
             playClickSound();
             modalTutorial.classList.remove('mostrar');
+            modalTutorial.classList.remove('modal-expandido');
 
+            transicionables.forEach(el => el.classList.remove('ocultar-suave'));
+            tutorialNav.classList.remove('mostrar');
+
+            personajeVideo.classList.remove('empujado-izquierda');
             personajeVideo.classList.remove('zoom-camara');
             personajeVideo.classList.add('zoom-camara-reversa');
 
