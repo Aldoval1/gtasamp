@@ -53,6 +53,7 @@
 <!-- Modal de Tutorial -->
 <div class="modal-oculto modal-izquierda" id="modal-tutorial">
 <div class="modal-contenido">
+<div class="btn-cerrar" id="btn-cerrar-tutorial">X</div>
 <h2 class="titulo-settings" id="titulo-tutorial">¿Quieres ver el tutorial?</h2>
 <div class="opciones-settings">
 <button class="selector-idioma btn-opcion" id="btn-tutorial-si">Sí</button>
@@ -147,6 +148,7 @@
         const btnTutorialNoEl = document.getElementById('btn-tutorial-no');
         const btnPlay = document.getElementById('btn-play');
         const modalTutorial = document.getElementById('modal-tutorial');
+        const btnCerrarTutorial = document.getElementById('btn-cerrar-tutorial');
         const tituloJuego = document.querySelector('.titulo-juego');
         const botonesContenedor = document.querySelector('.botones-contenedor');
         const personajeVideo = document.querySelector('.personaje-video');
@@ -175,6 +177,16 @@
             setTimeout(() => {
                 modalTutorial.classList.add('mostrar');
             }, 2000);
+        });
+
+
+        btnCerrarTutorial.addEventListener('click', () => {
+            playClickSound();
+            modalTutorial.classList.remove('mostrar');
+            personajeVideo.classList.remove('zoom-camara');
+            tituloJuego.classList.remove('fade-out');
+            botonesContenedor.classList.remove('fade-out');
+            nubesContainer.classList.remove('fade-out');
         });
 
         // Configurar volumen de la música
