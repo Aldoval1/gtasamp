@@ -174,19 +174,25 @@ body, html {
 
 /* --- Settings Modal --- */
 .modal-oculto {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 10; /* Por encima de todo */
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    /* Para el efecto fade-in suave */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .modal-oculto.mostrar {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-contenido {
@@ -246,4 +252,71 @@ div#btn-cerrar-settings {
     /* Hand drawn style */
     border-radius: 50% 40% 60% 45% / 45% 60% 40% 50%;
     background-color: white;
+}
+
+/* --- Controles de Settings --- */
+.opciones-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 80%;
+    margin-top: 40px;
+}
+
+.opcion-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opcion-grupo label {
+    font-family: 'Barriecito', system-ui;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Selector dibujado a mano */
+.selector-idioma {
+    font-family: 'Barriecito', system-ui;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: 3px solid black;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; /* Hand-drawn look */
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    appearance: none; /* remove default arrow */
+    text-align: center;
+}
+
+/* Slider (range) dibujado a mano */
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+/* Track del slider */
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: black;
+    border-radius: 10px 25px 15px 30px / 30px 10px 25px 15px; /* Hand-drawn */
+}
+
+/* Thumb del slider (la bolita) */
+input[type=range]::-webkit-slider-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50% 40% 60% 45% / 45% 60% 40% 50%; /* Hand-drawn */
+    background: white;
+    border: 3px solid black;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px; /* Centrar respecto al track */
 }
