@@ -62,6 +62,20 @@ body, html {
     animation: entradaCaida 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
+.personaje-balanceo {
+    /* Balanceo constante */
+    animation: balanceoContinuo 2s ease-in-out infinite alternate;
+}
+
+@keyframes balanceoContinuo {
+    from {
+        transform: rotate(-2deg);
+    }
+    to {
+        transform: rotate(2deg);
+    }
+}
+
 .personaje-video {
     /* Altura responsive para que no se salga de la pantalla en móviles */
     height: 45vh;
