@@ -18,14 +18,14 @@
 <!-- Contenedor del fondo animado (Nubes) -->
 <div class="nubes-fondo" id="nubes-container"></div>
 <!-- Contenedor del personaje (Video) -->
-<h1 class="titulo-juego" id="titulo-principal">OUR LIMBO</h1>
-<div class="personaje-contenedor" id="personaje-container">
+<h1 class="titulo-juego">OUR LIMBO</h1>
+<div class="personaje-contenedor">
 <!-- 'autoplay', 'loop', 'muted' y 'playsinline' aseguran que se reproduzca solo -->
 <video autoplay="" class="personaje-video" loop="" muted="" playsinline="" src="cayendo.mp4"></video>
 </div>
 <!-- Contenedor de Botones -->
-<div class="botones-contenedor" id="botones-principal">
-<img alt="Play" class="boton-juego" id="btn-play" src="playbutton.png"/>
+<div class="botones-contenedor">
+<img alt="Play" class="boton-juego" src="playbutton.png"/>
 <img alt="Settings" class="boton-juego" id="btn-settings" src="settingbutton.png"/>
 </div>
 <!-- Modal de Ajustes -->
@@ -47,14 +47,6 @@
 </select>
 </div>
 </div>
-</div>
-</div>
-<!-- Modal de Tutorial -->
-<div class="modal-tutorial" id="modal-tutorial">
-<h2 class="titulo-tutorial" id="titulo-tutorial">¿Quieres ver el tutorial?</h2>
-<div class="botones-tutorial">
-<button class="btn-tutorial" id="btn-tutorial-si">Sí</button>
-<button class="btn-tutorial" id="btn-tutorial-no">No</button>
 </div>
 </div>
 <script>
@@ -120,18 +112,12 @@
             en: {
                 tituloSettings: 'Settings',
                 labelMusica: 'Music Volume',
-                labelIdioma: 'Language',
-                tituloTutorial: 'Do you want to see the tutorial?',
-                btnSi: 'Yes',
-                btnNo: 'No'
+                labelIdioma: 'Language'
             },
             es: {
                 tituloSettings: 'Ajustes',
                 labelMusica: 'Volumen Música',
-                labelIdioma: 'Idioma',
-                tituloTutorial: '¿Quieres ver el tutorial?',
-                btnSi: 'Sí',
-                btnNo: 'No'
+                labelIdioma: 'Idioma'
             }
         };
 
@@ -163,9 +149,6 @@
             titleSettingsEl.textContent = textos[idioma].tituloSettings;
             labelMusicaEl.textContent = textos[idioma].labelMusica;
             labelIdiomaEl.textContent = textos[idioma].labelIdioma;
-            document.getElementById('titulo-tutorial').textContent = textos[idioma].tituloTutorial;
-            document.getElementById('btn-tutorial-si').textContent = textos[idioma].btnSi;
-            document.getElementById('btn-tutorial-no').textContent = textos[idioma].btnNo;
         });
 
         // Intentar iniciar la música inmediatamente al cargar la página
@@ -182,33 +165,6 @@
                 bgMusic.play().catch(e => console.log('Autoplay prevent:', e));
                 musicaIniciada = true;
             }
-        });
-
-
-        // --- Lógica del Botón Play y Transición al Tutorial ---
-        const btnPlay = document.getElementById('btn-play');
-        const tituloPrincipal = document.getElementById('titulo-principal');
-        const botonesPrincipal = document.getElementById('botones-principal');
-        const personajeContainer = document.getElementById('personaje-container');
-        const modalTutorial = document.getElementById('modal-tutorial');
-
-        btnPlay.addEventListener('click', () => {
-            // Desvanecer título y botones (fade out)
-            tituloPrincipal.classList.add('desvanecer');
-            botonesPrincipal.classList.add('desvanecer');
-
-            // Iniciar animación de zoom en el video
-            personajeContainer.classList.add('zoom-derecha');
-
-            // Mostrar modal del tutorial con un pequeño retraso para sincronizar
-            setTimeout(() => {
-                modalTutorial.classList.add('mostrar');
-            }, 1000); // 1 segundo de retraso
-        });
-
-        // Agregar sonido a los botones del tutorial también
-        document.querySelectorAll('.btn-tutorial').forEach(btn => {
-            btn.addEventListener('click', playClickSound);
         });
 </script>
 </body>
