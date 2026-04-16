@@ -122,3 +122,45 @@ body, html {
         opacity: 1;
     }
 }
+
+/* --- Botones de la Interfaz --- */
+.botones-contenedor {
+    position: absolute;
+    bottom: 15%; /* Colocado en la parte inferior, debajo del personaje */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4; /* Delante de las nubes y el video */
+
+    display: flex;
+    gap: 30px; /* Separación entre botones */
+    justify-content: center;
+    align-items: center;
+
+    /* Efecto de aparecer poco a poco (Fade-in) igual que el título */
+    opacity: 0;
+    /* La animación dura 3s, espera 2s (el mismo timing que el título) antes de empezar */
+    animation: aparecerTitulo 3s ease-in-out 2s forwards;
+}
+
+.boton-juego {
+    width: 80px; /* Tamaño base, ajusta según sea necesario */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+/* Efecto hover en los botones */
+.boton-juego:hover {
+    transform: scale(1.1);
+}
+
+/* Responsivo para los botones */
+@media (max-width: 768px) {
+    .botones-contenedor {
+        bottom: 10%;
+        gap: 20px;
+    }
+    .boton-juego {
+        width: 60px;
+    }
+}
