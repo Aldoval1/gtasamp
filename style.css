@@ -88,12 +88,12 @@ body, html {
 /* --- Título del Juego --- */
 .titulo-juego {
     position: absolute;
-    top: 15%; /* Colocado en la parte superior, arriba del personaje */
+    top: 24%; /* Colocado en la parte superior, arriba del personaje */
     left: 50%;
     transform: translateX(-50%);
     z-index: 4; /* Delante de todo */
 
-    font-family: 'Courier New', Courier, monospace; /* Fuente de estilo mecanografía/novela gráfica */
+    font-family: 'Barriecito', system-ui; /* Fuente de estilo mecanografía/novela gráfica */
     font-size: 5rem;
     font-weight: 900;
     color: #000;
@@ -103,14 +103,14 @@ body, html {
     /* Efecto de aparecer poco a poco (Fade-in) */
     opacity: 0;
     /* La animación dura 3s, pero espera 4s (el tiempo que tarda en caer el personaje) antes de empezar */
-    animation: aparecerTitulo 3s ease-in-out 4s forwards;
+    animation: aparecerTitulo 3s ease-in-out 2s forwards;
 }
 
 /* Responsivo para el título */
 @media (max-width: 768px) {
     .titulo-juego {
         font-size: 3rem;
-        top: 10%;
+        top: 18%;
     }
 }
 
