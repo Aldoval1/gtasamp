@@ -21,8 +21,8 @@ body, html {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     /* Z-index 3 to be IN FRONT of the video which is z-index 2 */
     z-index: 3;
@@ -54,12 +54,15 @@ body, html {
 /* --- Animación y Posicionamiento del Personaje --- */
 .personaje-contenedor {
     position: absolute;
-    left: 50%; /* Centrado horizontal */
-    transform: translateX(-50%);
+    left: 50vw;
+    top: 50vh; /* Centrado horizontal */
+    transform: translate(-50%, -50%);
     z-index: 2;
 
     /* La animación entra desde arriba hacia el centro */
     animation: entradaCaida 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+
+    transition: transform 2s ease-in-out;
 }
 
 .personaje-video {
@@ -77,10 +80,10 @@ body, html {
 
 @keyframes entradaCaida {
     0% {
-        top: -50%; /* Comienza fuera de la pantalla, arriba */
+        top: -50vh; /* Comienza fuera de la pantalla, arriba */
     }
     100% {
-        top: 50%; /* Se detiene exactamente a la mitad */
+        top: 50vh; /* Se detiene exactamente a la mitad */
         transform: translate(-50%, -50%); /* Ajusta el centro del elemento consigo mismo */
     }
 }
@@ -88,8 +91,8 @@ body, html {
 /* --- Título del Juego --- */
 .titulo-juego {
     position: absolute;
-    top: 24%; /* Colocado en la parte superior, arriba del personaje */
-    left: 50%;
+    top: 24vh; /* Colocado en la parte superior, arriba del personaje */
+    left: 50vw;
     transform: translateX(-50%);
     z-index: 4; /* Delante de todo */
 
@@ -110,7 +113,7 @@ body, html {
 @media (max-width: 768px) {
     .titulo-juego {
         font-size: 3rem;
-        top: 18%;
+        top: 18vh;
     }
 }
 
@@ -126,8 +129,8 @@ body, html {
 /* --- Botones de la Interfaz --- */
 .botones-contenedor {
     position: absolute;
-    bottom: 15%; /* Colocado en la parte inferior, debajo del personaje */
-    left: 50%;
+    bottom: 15vh; /* Colocado en la parte inferior, debajo del personaje */
+    left: 50vw;
     transform: translateX(-50%);
     z-index: 4; /* Delante de las nubes y el video */
 
@@ -157,7 +160,7 @@ body, html {
 /* Responsivo para los botones */
 @media (max-width: 768px) {
     .botones-contenedor {
-        bottom: 10%;
+        bottom: 10vh;
         gap: 20px;
     }
     .boton-juego {
@@ -330,19 +333,12 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .zoom-camara {
-    /* Mantiene el personaje centrado mientras hace zoom (scale) y se mueve a la derecha (translate X positivo),
-       lo que da la ilusión de que la cámara se mueve a la izquierda. */
-    animation: zoomYDesplazamiento 2s forwards ease-in-out;
+    animation: none !important;
+
+    transform: translate(20vw, -50%) scale(3);
 }
 
-@keyframes zoomYDesplazamiento {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(3) translate(30%, 5%);
-    }
-}
+
 
 .modal-izquierda {
     justify-content: flex-start;
