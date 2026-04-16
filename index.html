@@ -13,7 +13,7 @@
 <body>
 <!-- Audio Elements -->
 <!-- Note: In github these might need exact paths, we use placeholder names provided by user -->
-<audio id="bg-music" loop="" src="Liminal Save Screen.mp3"></audio>
+<audio autoplay="" id="bg-music" loop="" src="Liminal Save Screen.mp3"></audio>
 <audio id="click-sound" src="freesound_community-menu-selection-1022.wav"></audio>
 <!-- Contenedor del fondo animado (Nubes) -->
 <div class="nubes-fondo" id="nubes-container"></div>
@@ -151,7 +151,14 @@
             labelIdiomaEl.textContent = textos[idioma].labelIdioma;
         });
 
-        // Iniciar música en la primera interacción (política de navegadores)
+        // Intentar iniciar la música inmediatamente al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            bgMusic.play().catch(e => {
+                console.log('El navegador bloqueó el autoplay sin interacción previa:', e);
+                // Si el navegador lo bloquea, se reproducirá al hacer el primer click
+            });
+        });
+
         let musicaIniciada = false;
         document.body.addEventListener('click', () => {
             if (!musicaIniciada) {
