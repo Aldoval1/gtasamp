@@ -11,6 +11,10 @@
 <link href="style.css" rel="stylesheet"/>
 </head>
 <body>
+<!-- Audio Elements -->
+<!-- Note: In github these might need exact paths, we use placeholder names provided by user -->
+<audio id="bg-music" loop="" src="Liminal Save Screen.mp3"></audio>
+<audio id="click-sound" src="freesound_community-menu-selection-1022.wav"></audio>
 <!-- Contenedor del fondo animado (Nubes) -->
 <div class="nubes-fondo" id="nubes-container"></div>
 <!-- Contenedor del personaje (Video) -->
@@ -30,6 +34,19 @@
 <!-- As per the user, it is represented by cancel image in github files. -->
 <div class="btn-cerrar" id="btn-cerrar-settings">X</div>
 <h2 class="titulo-settings">Settings</h2>
+<div class="opciones-settings">
+<div class="opcion-grupo">
+<label id="label-musica">Music Volume</label>
+<input id="volumen-musica" max="1" min="0" step="0.01" type="range" value="0.5"/>
+</div>
+<div class="opcion-grupo">
+<label id="label-idioma">Language</label>
+<select class="selector-idioma" id="selector-idioma">
+<option value="en">English</option>
+<option value="es">Español</option>
+</select>
+</div>
+</div>
 </div>
 </div>
 <script>
@@ -81,6 +98,66 @@
         btnCerrarSettings.addEventListener('click', () => {
             modalSettings.classList.remove('mostrar');
             mainElements.forEach(el => el.classList.remove('blur-background'));
+        });
+
+
+        // --- Lógica de Audio e Idiomas ---
+        const bgMusic = document.getElementById('bg-music');
+        const clickSound = document.getElementById('click-sound');
+        const sliderVolumen = document.getElementById('volumen-musica');
+        const selectorIdioma = document.getElementById('selector-idioma');
+
+        // Textos para internacionalización
+        const textos = {
+            en: {
+                tituloSettings: 'Settings',
+                labelMusica: 'Music Volume',
+                labelIdioma: 'Language'
+            },
+            es: {
+                tituloSettings: 'Ajustes',
+                labelMusica: 'Volumen Música',
+                labelIdioma: 'Idioma'
+            }
+        };
+
+        const titleSettingsEl = document.querySelector('.titulo-settings');
+        const labelMusicaEl = document.getElementById('label-musica');
+        const labelIdiomaEl = document.getElementById('label-idioma');
+
+        // Función para reproducir sonido de click
+        function playClickSound() {
+            // Reiniciar el sonido por si se hace click rápido
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log('Audio error:', e));
+        }
+
+        // Agregar sonido de click a botones
+        document.querySelectorAll('.boton-juego, .btn-cerrar').forEach(btn => {
+            btn.addEventListener('click', playClickSound);
+        });
+
+        // Configurar volumen de la música
+        bgMusic.volume = sliderVolumen.value;
+        sliderVolumen.addEventListener('input', (e) => {
+            bgMusic.volume = e.target.value;
+        });
+
+        // Configurar cambio de idioma
+        selectorIdioma.addEventListener('change', (e) => {
+            const idioma = e.target.value;
+            titleSettingsEl.textContent = textos[idioma].tituloSettings;
+            labelMusicaEl.textContent = textos[idioma].labelMusica;
+            labelIdiomaEl.textContent = textos[idioma].labelIdioma;
+        });
+
+        // Iniciar música en la primera interacción (política de navegadores)
+        let musicaIniciada = false;
+        document.body.addEventListener('click', () => {
+            if (!musicaIniciada) {
+                bgMusic.play().catch(e => console.log('Autoplay prevent:', e));
+                musicaIniciada = true;
+            }
         });
 </script>
 </body>
