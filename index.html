@@ -53,11 +53,12 @@
 </div>
 
 <!-- Modal de Tutorial -->
-<div class="modal-oculto" id="modal-tutorial">
-<div class="modal-contenido">
-<h2 class="titulo-settings" id="titulo-tutorial">Do you want to see the tutorial?</h2>
-<div class="opciones-settings">
-<button class="selector-idioma btn-opcion" id="btn-tutorial-si">Yes</button>
+<div class="modal-oculto modal-izquierda" id="modal-tutorial">
+<div class="modal-contenido" id="modal-contenido-tutorial">
+<div class="btn-cerrar" id="btn-cerrar-tutorial">X</div>
+<h2 class="titulo-settings transicionable" id="titulo-tutorial">¿Quieres ver el tutorial?</h2>
+<div class="opciones-settings transicionable" id="opciones-tutorial">
+<button class="selector-idioma btn-opcion" id="btn-tutorial-si">Sí</button>
 <button class="selector-idioma btn-opcion" id="btn-tutorial-no">No</button>
 </div>
 <div class="tutorial-paginas-contenedor" id="tutorial-paginas-contenedor">
@@ -72,20 +73,6 @@
 </div>
 </div>
 </div>
-
-<!-- Modal de Diapositivas de Tutorial -->
-<div class="modal-oculto" id="modal-slides">
-<div class="modal-contenido modal-contenido-slides">
-<h2 class="titulo-settings" id="slide-title" style="text-align: center;">Welcome to Our Limbo</h2>
-<p class="slide-text" id="slide-text" style="text-align: justify; margin: 20px; font-family: 'Barriecito', system-ui; font-size: 1.2rem;">Your goal is to escape the legal limbo of many immigrants by surviving the passage of time. To win, you must progressively unlock these milestones: Work Permit, Approved Asylum, Permanent Residency (Green Card), and US Citizenship. Random Milestone Cards: During the game, you will unpredictably face the opportunity to advance your legal status to reach these milestones. Tight Victory: If you manage to survive the cost of the final card (Citizenship), you will automatically win the game on the next turn.</p>
-<div class="botones-slides">
-<button class="selector-idioma btn-opcion btn-mitad" id="btn-slide-prev" style="display: none;">Previous</button>
-<button class="selector-idioma btn-opcion btn-mitad" id="btn-slide-next">Next</button>
-<button class="selector-idioma btn-opcion" id="btn-slide-start" style="display: none; width: 100%;">Start Game</button>
-</div>
-</div>
-</div>
-
 <script>
 
         const nubesContainer = document.getElementById('nubes-container');
@@ -153,18 +140,7 @@
                 labelIdioma: 'Language',
                 tituloTutorial: 'Do you want to see the tutorial?',
                 btnSi: 'Yes',
-                btnNo: 'No',
-                slide1Title: 'Welcome to Our Limbo',
-                slide1Text: 'Your goal is to escape the legal limbo of many immigrants by surviving the passage of time. To win, you must progressively unlock these milestones: Work Permit, Approved Asylum, Permanent Residency (Green Card), and US Citizenship. Random Milestone Cards: During the game, you will unpredictably face the opportunity to advance your legal status to reach these milestones. Tight Victory: If you manage to survive the cost of the final card (Citizenship), you will automatically win the game on the next turn.',
-                slide2Title: 'Controls and Strategic Decision',
-                slide2Text: 'Make decisions by swiping the central card left or right. Before releasing it, observe the arrows (▲ or ▼) at the top to predict the consequences of your action. When you face a milestone card, you will have a Strategic Decision: you can reject it (swipe in one direction, which has no cost) or accept it (swipe in the other, which will drastically drain resources like Money, Health, or Hope due to the immense costs and stress of the system).',
-                slide3Title: 'Your Pillars of Survival',
-                slide3Text: 'Maintain the balance of your four resources: Health, Economy, Hope, and Security. Be very careful with the high costs of the milestone cards; if any of these bars reach zero, the system will defeat you and you will lose the game.',
-                slide4Title: 'Time and Reality',
-                slide4Text: 'Every 3 decisions equal 1 year of survival in the system. Every situation you face is based on real research and academic testimonies.',
-                btnNext: 'Next',
-                btnPrev: 'Previous',
-                btnStart: 'Start Game'
+                btnNo: 'No'
             },
                         es: {
                 tituloSettings: 'Ajustes',
@@ -172,18 +148,7 @@
                 labelIdioma: 'Idioma',
                 tituloTutorial: '¿Quieres ver el tutorial?',
                 btnSi: 'Sí',
-                btnNo: 'No',
-                slide1Title: 'Bienvenido a Nuestro Limbo',
-                slide1Text: 'Tu meta es escapar del limbo legal de muchos inmigrantes sobreviviendo el paso del tiempo. Para ganar, debes desbloquear estos hitos progresivamente: Permiso de Trabajo, Asilo Aprobado, Residencia Permanente (Green Card) y Ciudadanía Estadounidense. Cartas de Hito Aleatorias: Durante el juego, te aparecerá de forma impredecible la oportunidad de avanzar tu estatus legal para alcanzar estos hitos. Victoria Ajustada: Si logras sobrevivir al costo de la carta final (Ciudadanía), ganarás el juego automáticamente al siguiente turno.',
-                slide2Title: 'Los Controles y la Decisión Estratégica',
-                slide2Text: 'Toma decisiones deslizando la tarjeta central hacia la izquierda o la derecha. Antes de soltarla, observa las flechas (▲ o ▼) en la parte superior para predecir las consecuencias de tu acción. Cuando enfrentes una carta de hito, tendrás una Decisión Estratégica: podrás rechazarla (deslizar a una dirección, lo cual no tiene ningún costo) o aceptarla (deslizar a la otra, lo cual drenará drásticamente recursos como Dinero, Salud o Esperanza debido a los inmensos costos y estrés del sistema).',
-                slide3Title: 'Tus Pilares de Supervivencia',
-                slide3Text: 'Mantén el equilibrio de tus cuatro recursos: Salud, Economía, Esperanza y Seguridad. Ten mucho cuidado con los altos costos de las cartas de hito; si cualquiera de estas barras llega a cero, el sistema te vencerá y perderás el juego.',
-                slide4Title: 'El Tiempo y la Realidad',
-                slide4Text: 'Cada 3 decisiones equivalen a 1 año de supervivencia en el sistema. Cada situación que enfrentarás está basada en investigaciones reales y testimonios académicos.',
-                btnNext: 'Siguiente',
-                btnPrev: 'Anterior',
-                btnStart: 'Comenzar Juego'
+                btnNo: 'No'
             }
         };
 
@@ -322,88 +287,8 @@
             bgMusic.volume = e.target.value;
         });
 
-
-        const modalSlides = document.getElementById('modal-slides');
-        const slideTitleEl = document.getElementById('slide-title');
-        const slideTextEl = document.getElementById('slide-text');
-        const btnSlidePrev = document.getElementById('btn-slide-prev');
-        const btnSlideNext = document.getElementById('btn-slide-next');
-        const btnSlideStart = document.getElementById('btn-slide-start');
-
-        let currentSlide = 1;
-        const totalSlides = 4;
-
-        function updateSlide() {
-            const idioma = selectorIdioma.value;
-            slideTitleEl.textContent = textos[idioma]['slide' + currentSlide + 'Title'];
-            slideTextEl.textContent = textos[idioma]['slide' + currentSlide + 'Text'];
-
-            btnSlidePrev.textContent = textos[idioma].btnPrev;
-            btnSlideNext.textContent = textos[idioma].btnNext;
-            btnSlideStart.textContent = textos[idioma].btnStart;
-
-            if (currentSlide === 1) {
-                btnSlidePrev.style.display = 'none';
-                btnSlideNext.style.display = 'block';
-                btnSlideStart.style.display = 'none';
-                btnSlideNext.style.width = '100%';
-            } else if (currentSlide === totalSlides) {
-                btnSlidePrev.style.display = 'block';
-                btnSlideNext.style.display = 'none';
-                btnSlideStart.style.display = 'block';
-                btnSlidePrev.style.width = '48%';
-                btnSlideStart.style.width = '48%';
-            } else {
-                btnSlidePrev.style.display = 'block';
-                btnSlideNext.style.display = 'block';
-                btnSlideStart.style.display = 'none';
-                btnSlidePrev.style.width = '48%';
-                btnSlideNext.style.width = '48%';
-            }
-        }
-
-        btnTutorialSiEl.addEventListener('click', () => {
-            playClickSound();
-            modalTutorial.classList.remove('mostrar');
-            currentSlide = 1;
-            updateSlide();
-            modalSlides.classList.add('mostrar');
-        });
-
-        btnTutorialNoEl.addEventListener('click', () => {
-            playClickSound();
-            // In a real game, redirect to the game scene
-            console.log('Redirecting to game without tutorial...');
-            // window.location.href = 'game.html';
-            modalTutorial.classList.remove('mostrar'); // Temp behavior
-        });
-
-        btnSlideNext.addEventListener('click', () => {
-            playClickSound();
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                updateSlide();
-            }
-        });
-
-        btnSlidePrev.addEventListener('click', () => {
-            playClickSound();
-            if (currentSlide > 1) {
-                currentSlide--;
-                updateSlide();
-            }
-        });
-
-        btnSlideStart.addEventListener('click', () => {
-            playClickSound();
-            // In a real game, redirect to the game scene
-            console.log('Redirecting to game...');
-            // window.location.href = 'game.html';
-            modalSlides.classList.remove('mostrar'); // Temp behavior
-        });
-
-        // Make sure language change updates the slide if it's open
-        selectorIdioma.addEventListener('change', (e) => {
+        // Configurar cambio de idioma
+                selectorIdioma.addEventListener('change', (e) => {
             const idioma = e.target.value;
             titleSettingsEl.textContent = textos[idioma].tituloSettings;
             labelMusicaEl.textContent = textos[idioma].labelMusica;
@@ -411,9 +296,7 @@
             if (tituloTutorialEl) tituloTutorialEl.textContent = textos[idioma].tituloTutorial;
             if (btnTutorialSiEl) btnTutorialSiEl.textContent = textos[idioma].btnSi;
             if (btnTutorialNoEl) btnTutorialNoEl.textContent = textos[idioma].btnNo;
-            updateSlide();
         });
-
 
         // Intentar iniciar la música inmediatamente al cargar la página
         window.addEventListener('DOMContentLoaded', () => {
