@@ -460,6 +460,57 @@ input[type=range]::-webkit-slider-thumb {
     transition: opacity 0.3s ease;
 }
 
+.tutorial-paginas-contenedor {
+    position: absolute;
+    top: 50px; /* Debajo del boton cerrar */
+    bottom: 100px; /* Encima de los botones de nav */
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease 0.5s; /* Mismo delay que los botones */
+}
+
+.tutorial-paginas-contenedor.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pagina-tutorial {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.pagina-tutorial.activa {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.tutorial-paginas-contenedor {
+    z-index: 10;
+}
+.pagina-tutorial {
+    pointer-events: none !important;
+}
+.pagina-tutorial.activa {
+    pointer-events: none !important;
+}
+
+.pagina-tutorial h1 {
+    font-family: 'Barriecito', system-ui;
+    font-size: 3rem;
+    text-align: center;
+}
+
 
 .btn-opcion {
     width: 100%;
