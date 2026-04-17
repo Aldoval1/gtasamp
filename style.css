@@ -358,10 +358,60 @@ input[type=range]::-webkit-slider-thumb {
 
 @keyframes zoomYDesplazamiento {
     0% {
-        transform: translate(-50%, -50%) scale(1) translate(0, 0);
+        transform: translate(0, 0) scale(1);
+        transform-origin: center center;
     }
     100% {
-        transform: translate(-50%, -50%) scale(3) translate(25%, 5%);
+        transform: translate(15%, 15%) scale(3);
+        transform-origin: center center;
+    }
+}
+
+@keyframes zoomYDesplazamientoReversa {
+    0% {
+        transform: translate(15%, 15%) scale(3);
+        transform-origin: center center;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        transform-origin: center center;
+    }
+}
+
+.fade-in-ui {
+    animation: fadeInAnim 1s ease forwards !important;
+    pointer-events: auto !important;
+}
+
+@keyframes fadeInAnim {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-izquierda .modal-contenido {
+    transform: translateX(-25vw);
+}
+
+.modal-oculto.modal-expandido .modal-contenido {
+    width: 70vw;
+    height: 80vh;
+    transform: translateX(0);
+}
+
+.empujado-izquierda {
+    animation: videoEmpujado 1s ease-in-out forwards;
+}
+
+@keyframes videoEmpujado {
+    0% {
+        transform: translate(15%, 15%) scale(3);
+        opacity: 1;
+        transform-origin: center center;
+    }
+    100% {
+        transform: translate(-50%, 15%) scale(3);
+        opacity: 0;
+        transform-origin: center center;
     }
 }
 
@@ -469,31 +519,4 @@ input[type=range]::-webkit-slider-thumb {
 
 #titulo-tutorial {
     text-align: center;
-}
-
-
-.modal-contenido-slides {
-    height: auto;
-    min-height: 500px;
-    padding-bottom: 20px;
-    width: 600px;
-}
-
-@media (max-width: 768px) {
-    .modal-contenido-slides {
-        width: 90%;
-        min-height: 60vh;
-    }
-}
-
-.botones-slides {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin-top: auto;
-    gap: 10px;
-}
-
-.btn-mitad {
-    width: 48%;
 }
