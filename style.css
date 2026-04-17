@@ -222,6 +222,8 @@ body, html {
     border: 4px solid black;
     border-radius: 10px 25px 15px 30px / 30px 10px 25px 15px; /* Bordes ligeramente deformes */
     box-shadow: 3px 3px 0px 2px rgba(0,0,0,0.8), -1px -1px 0px 1px rgba(0,0,0,0.6);
+
+    transition: all 1s ease-in-out;
 }
 
 .titulo-settings {
@@ -386,10 +388,78 @@ input[type=range]::-webkit-slider-thumb {
     to { opacity: 1; }
 }
 
-.modal-izquierda {
-    justify-content: flex-start;
-    padding-left: 10%;
+.modal-izquierda .modal-contenido {
+    transform: translateX(-25vw);
 }
+
+.modal-oculto.modal-expandido .modal-contenido {
+    width: 70vw;
+    height: 80vh;
+    transform: translateX(0);
+}
+
+.empujado-izquierda {
+    animation: videoEmpujado 1s ease-in-out forwards;
+}
+
+@keyframes videoEmpujado {
+    0% {
+        transform: translate(15%, 15%) scale(3);
+        opacity: 1;
+        transform-origin: center center;
+    }
+    100% {
+        transform: translate(-50%, 15%) scale(3);
+        opacity: 0;
+        transform-origin: center center;
+    }
+}
+
+.tutorial-navegacion {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease 0.5s; /* Delay to let modal expand first */
+}
+
+.tutorial-navegacion.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.boton-nav {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    /* Hand drawn style text buttons instead of images since we don't have left/right.png */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Barriecito', system-ui;
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    border: 3px solid black;
+    border-radius: 50% 40% 60% 45% / 45% 60% 40% 50%;
+    background-color: white;
+}
+
+.boton-nav:hover {
+    transform: scale(1.1);
+}
+
+.ocultar-suave {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
 
 .btn-opcion {
     width: 100%;
