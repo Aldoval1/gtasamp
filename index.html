@@ -21,7 +21,9 @@
 <h1 class="titulo-juego">OUR LIMBO</h1>
 <div class="personaje-contenedor">
 <!-- 'autoplay', 'loop', 'muted' y 'playsinline' aseguran que se reproduzca solo -->
+<div class="personaje-balanceo">
 <video autoplay="" class="personaje-video" loop="" muted="" playsinline="" src="cayendo.mp4"></video>
+</div>
 </div>
 <!-- Contenedor de Botones -->
 <div class="botones-contenedor">
@@ -57,6 +59,16 @@
 <div class="opciones-settings">
 <button class="selector-idioma btn-opcion" id="btn-tutorial-si">Yes</button>
 <button class="selector-idioma btn-opcion" id="btn-tutorial-no">No</button>
+</div>
+<div class="tutorial-paginas-contenedor" id="tutorial-paginas-contenedor">
+<div class="pagina-tutorial activa"><h1>Tutorial 1</h1></div>
+<div class="pagina-tutorial"><h1>Tutorial 2</h1></div>
+<div class="pagina-tutorial"><h1>Tutorial 3</h1></div>
+<div class="pagina-tutorial"><h1>Tutorial 4</h1></div>
+</div>
+<div class="tutorial-navegacion" id="tutorial-nav">
+<div class="boton-nav" id="btn-nav-izq">&lt;</div>
+<div class="boton-nav" id="btn-nav-der">&gt;</div>
 </div>
 </div>
 </div>
@@ -183,6 +195,7 @@
         const btnTutorialNoEl = document.getElementById('btn-tutorial-no');
         const btnPlay = document.getElementById('btn-play');
         const modalTutorial = document.getElementById('modal-tutorial');
+        const btnCerrarTutorial = document.getElementById('btn-cerrar-tutorial');
         const tituloJuego = document.querySelector('.titulo-juego');
         const botonesContenedor = document.querySelector('.botones-contenedor');
         const personajeVideo = document.querySelector('.personaje-video');
@@ -203,14 +216,104 @@
 
         btnPlay.addEventListener('click', () => {
             playClickSound();
+            tituloJuego.classList.remove('fade-in-ui');
+            botonesContenedor.classList.remove('fade-in-ui');
+            nubesContainer.classList.remove('fade-in-ui');
+
             tituloJuego.classList.add('fade-out');
             botonesContenedor.classList.add('fade-out');
             nubesContainer.classList.add('fade-out');
+
+            personajeVideo.classList.remove('zoom-camara-reversa');
             personajeVideo.classList.add('zoom-camara');
 
             setTimeout(() => {
                 modalTutorial.classList.add('mostrar');
             }, 2000);
+        });
+
+
+        const modalContenidoTutorial = document.getElementById('modal-contenido-tutorial');
+        const transicionables = document.querySelectorAll('.transicionable');
+        const tutorialNav = document.getElementById('tutorial-nav');
+        const tutorialPaginasContenedor = document.getElementById('tutorial-paginas-contenedor');
+        const paginasTutorial = document.querySelectorAll('.pagina-tutorial');
+        const btnNavIzq = document.getElementById('btn-nav-izq');
+        const btnNavDer = document.getElementById('btn-nav-der');
+
+        let paginaTutorialActual = 0;
+
+        function actualizarPaginacionTutorial() {
+            paginasTutorial.forEach((pagina, index) => {
+                if (index === paginaTutorialActual) {
+                    pagina.classList.add('activa');
+                } else {
+                    pagina.classList.remove('activa');
+                }
+            });
+
+            // Ocultar/mostrar botones según límites
+            btnNavIzq.style.visibility = paginaTutorialActual === 0 ? 'hidden' : 'visible';
+            btnNavDer.style.visibility = paginaTutorialActual === paginasTutorial.length - 1 ? 'hidden' : 'visible';
+        }
+
+        btnNavIzq.addEventListener('click', () => {
+            playClickSound();
+            if (paginaTutorialActual > 0) {
+                paginaTutorialActual--;
+                actualizarPaginacionTutorial();
+            }
+        });
+
+        btnNavDer.addEventListener('click', () => {
+            playClickSound();
+            if (paginaTutorialActual < paginasTutorial.length - 1) {
+                paginaTutorialActual++;
+                actualizarPaginacionTutorial();
+            }
+        });
+
+        btnTutorialSiEl.addEventListener('click', () => {
+            playClickSound();
+            // Expandir modal al centro
+            modalTutorial.classList.add('modal-expandido');
+
+            // Ocultar texto y botones actuales
+            transicionables.forEach(el => el.classList.add('ocultar-suave'));
+
+            // Mostrar flechas de navegación y contenedor de páginas
+            tutorialNav.classList.add('mostrar');
+            tutorialPaginasContenedor.classList.add('mostrar');
+
+            // Resetear a la primera página
+            paginaTutorialActual = 0;
+            actualizarPaginacionTutorial();
+
+            // Empujar el video a la izquierda
+            personajeVideo.classList.remove('zoom-camara');
+            personajeVideo.classList.add('empujado-izquierda');
+        });
+
+        btnCerrarTutorial.addEventListener('click', () => {
+            playClickSound();
+            modalTutorial.classList.remove('mostrar');
+            modalTutorial.classList.remove('modal-expandido');
+
+            transicionables.forEach(el => el.classList.remove('ocultar-suave'));
+            tutorialNav.classList.remove('mostrar');
+            tutorialPaginasContenedor.classList.remove('mostrar');
+
+            personajeVideo.classList.remove('empujado-izquierda');
+            personajeVideo.classList.remove('zoom-camara');
+            personajeVideo.classList.add('zoom-camara-reversa');
+
+            tituloJuego.classList.remove('fade-out');
+            botonesContenedor.classList.remove('fade-out');
+            nubesContainer.classList.remove('fade-out');
+
+            tituloJuego.classList.add('fade-in-ui');
+            botonesContenedor.classList.add('fade-in-ui');
+            nubesContainer.classList.add('fade-in-ui');
         });
 
         // Configurar volumen de la música
@@ -314,6 +417,7 @@
 
         // Intentar iniciar la música inmediatamente al cargar la página
         window.addEventListener('DOMContentLoaded', () => {
+            selectorIdioma.dispatchEvent(new Event('change'));
             bgMusic.play().catch(e => {
                 console.log('El navegador bloqueó el autoplay sin interacción previa:', e);
                 // Si el navegador lo bloquea, se reproducirá al hacer el primer click
