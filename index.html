@@ -61,6 +61,12 @@
 <button class="selector-idioma btn-opcion" id="btn-tutorial-si">Sí</button>
 <button class="selector-idioma btn-opcion" id="btn-tutorial-no">No</button>
 </div>
+<div class="tutorial-paginas-contenedor" id="tutorial-paginas-contenedor">
+<div class="pagina-tutorial activa"><h1>Tutorial 1</h1></div>
+<div class="pagina-tutorial"><h1>Tutorial 2</h1></div>
+<div class="pagina-tutorial"><h1>Tutorial 3</h1></div>
+<div class="pagina-tutorial"><h1>Tutorial 4</h1></div>
+</div>
 <div class="tutorial-navegacion" id="tutorial-nav">
 <div class="boton-nav" id="btn-nav-izq">&lt;</div>
 <div class="boton-nav" id="btn-nav-der">&gt;</div>
@@ -195,6 +201,42 @@
         const modalContenidoTutorial = document.getElementById('modal-contenido-tutorial');
         const transicionables = document.querySelectorAll('.transicionable');
         const tutorialNav = document.getElementById('tutorial-nav');
+        const tutorialPaginasContenedor = document.getElementById('tutorial-paginas-contenedor');
+        const paginasTutorial = document.querySelectorAll('.pagina-tutorial');
+        const btnNavIzq = document.getElementById('btn-nav-izq');
+        const btnNavDer = document.getElementById('btn-nav-der');
+
+        let paginaTutorialActual = 0;
+
+        function actualizarPaginacionTutorial() {
+            paginasTutorial.forEach((pagina, index) => {
+                if (index === paginaTutorialActual) {
+                    pagina.classList.add('activa');
+                } else {
+                    pagina.classList.remove('activa');
+                }
+            });
+
+            // Ocultar/mostrar botones según límites
+            btnNavIzq.style.visibility = paginaTutorialActual === 0 ? 'hidden' : 'visible';
+            btnNavDer.style.visibility = paginaTutorialActual === paginasTutorial.length - 1 ? 'hidden' : 'visible';
+        }
+
+        btnNavIzq.addEventListener('click', () => {
+            playClickSound();
+            if (paginaTutorialActual > 0) {
+                paginaTutorialActual--;
+                actualizarPaginacionTutorial();
+            }
+        });
+
+        btnNavDer.addEventListener('click', () => {
+            playClickSound();
+            if (paginaTutorialActual < paginasTutorial.length - 1) {
+                paginaTutorialActual++;
+                actualizarPaginacionTutorial();
+            }
+        });
 
         btnTutorialSiEl.addEventListener('click', () => {
             playClickSound();
@@ -204,8 +246,13 @@
             // Ocultar texto y botones actuales
             transicionables.forEach(el => el.classList.add('ocultar-suave'));
 
-            // Mostrar flechas de navegación
+            // Mostrar flechas de navegación y contenedor de páginas
             tutorialNav.classList.add('mostrar');
+            tutorialPaginasContenedor.classList.add('mostrar');
+
+            // Resetear a la primera página
+            paginaTutorialActual = 0;
+            actualizarPaginacionTutorial();
 
             // Empujar el video a la izquierda
             personajeVideo.classList.remove('zoom-camara');
@@ -219,6 +266,7 @@
 
             transicionables.forEach(el => el.classList.remove('ocultar-suave'));
             tutorialNav.classList.remove('mostrar');
+            tutorialPaginasContenedor.classList.remove('mostrar');
 
             personajeVideo.classList.remove('empujado-izquierda');
             personajeVideo.classList.remove('zoom-camara');
