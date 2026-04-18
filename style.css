@@ -549,51 +549,27 @@ input[type=range]::-webkit-slider-thumb {
     overflow: hidden;
 }
 
-/* Slide 1: Document */
-.visual-doc {
-    width: 60px;
-    height: 80px;
-    border: 3px solid black;
-    border-radius: 5px;
-    background: white;
+/* Slide 1: Swiping Deck */
+.visual-deck {
     position: relative;
-    padding: 10px;
-    box-shadow: 2px 2px 0 black;
+    width: 80px;
+    height: 110px;
 }
-.visual-line {
-    width: 100%;
-    height: 4px;
-    background: black;
-    margin-bottom: 8px;
-    border-radius: 2px;
-}
-.visual-stamp {
+.visual-card-back {
     position: absolute;
-    bottom: 10px;
-    right: -10px;
-    width: 50px;
-    height: 25px;
-    border: 3px solid red;
-    color: red;
-    font-family: 'Barriecito', system-ui;
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: rotate(-15deg) scale(2);
-    opacity: 0;
+    width: 70px;
+    height: 100px;
+    border: 3px solid black;
+    border-radius: 10px;
+    background: white;
+    z-index: 1;
 }
-.pagina-tutorial.activa .visual-stamp {
-    animation: stampAnim 2s infinite ease-in;
-}
-.visual-stamp::after {
-    content: "OK";
-}
-@keyframes stampAnim {
-    0%, 50% { opacity: 0; transform: rotate(-15deg) scale(2); }
-    60% { opacity: 1; transform: rotate(-15deg) scale(0.9); }
-    65% { opacity: 1; transform: rotate(-15deg) scale(1); }
-    100% { opacity: 1; transform: rotate(-15deg) scale(1); }
+/* Reusing swipe animations from Slide 2 for the top deck card */
+.deck-top {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    z-index: 2;
 }
 
 /* Slide 2: Swiping Card */
