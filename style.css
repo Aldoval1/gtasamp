@@ -627,38 +627,74 @@ input[type=range]::-webkit-slider-thumb {
 .visual-timeline-line {
     position: absolute;
     width: 0%;
-    height: 4px;
+    height: 8px; /* Thicker */
     background: black;
-    border-radius: 2px;
+    border-radius: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
 }
 .pagina-tutorial.activa .visual-timeline-line {
-    animation: drawLineAnim 4s infinite linear;
+    animation: drawLineAnim 6s infinite linear;
 }
 
 @keyframes drawLineAnim {
-    0% { width: 0%; }
-    80%, 100% { width: 100%; }
+    0%, 5% { width: 0%; }
+    20%, 30% { width: 33%; }
+    45%, 55% { width: 66%; }
+    70%, 95% { width: 100%; }
+    100% { width: 0%; }
 }
 
 .visual-timeline-point {
     position: absolute;
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: white;
     border: 3px solid black;
     top: 50%;
-    margin-top: -9px;
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 2;
 }
-.visual-timeline-point.p1 { left: 0%; }
+.visual-timeline-point.p1 { left: 0%; transform: translateY(-50%); } /* First point doesn't need translateX(-50%) to stay within bounds, but let's keep it uniform or adjust left/right */
+.visual-timeline-point.p1 { left: 5px; }
 .visual-timeline-point.p2 { left: 33%; }
 .visual-timeline-point.p3 { left: 66%; }
-.visual-timeline-point.p4 { right: 0%; }
+.visual-timeline-point.p4 { left: calc(100% - 5px); }
+
+/* Animate the points turning black */
+.pagina-tutorial.activa .visual-timeline-point.p1 { animation: pointColorAnim1 6s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p2 { animation: pointColorAnim2 6s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p3 { animation: pointColorAnim3 6s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p4 { animation: pointColorAnim4 6s infinite linear; }
+
+@keyframes pointColorAnim1 {
+    0%, 4% { background: white; }
+    5%, 95% { background: black; }
+    100% { background: white; }
+}
+@keyframes pointColorAnim2 {
+    0%, 19% { background: white; }
+    20%, 95% { background: black; }
+    100% { background: white; }
+}
+@keyframes pointColorAnim3 {
+    0%, 44% { background: white; }
+    45%, 95% { background: black; }
+    100% { background: white; }
+}
+@keyframes pointColorAnim4 {
+    0%, 69% { background: white; }
+    70%, 95% { background: black; }
+    100% { background: white; }
+}
 
 .visual-timeline-check {
     position: absolute;
-    top: 20px;
-    left: -10px;
+    top: 25px; /* Below the point */
+    left: 50%;
+    transform: translateX(-50%);
     width: 24px;
     height: 24px;
     border: 2px solid black;
@@ -673,33 +709,33 @@ input[type=range]::-webkit-slider-thumb {
     opacity: 0;
 }
 
-.pagina-tutorial.activa .visual-timeline-point.p1 .visual-timeline-check { animation: checkPopAnim 4s infinite linear; }
-.pagina-tutorial.activa .visual-timeline-point.p2 .visual-timeline-check { animation: checkPopAnim2 4s infinite linear; }
-.pagina-tutorial.activa .visual-timeline-point.p3 .visual-timeline-check { animation: checkPopAnim3 4s infinite linear; }
-.pagina-tutorial.activa .visual-timeline-point.p4 .visual-timeline-check { animation: checkPopAnim4 4s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p1 .visual-timeline-check { animation: checkPopAnim1 6s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p2 .visual-timeline-check { animation: checkPopAnim2 6s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p3 .visual-timeline-check { animation: checkPopAnim3 6s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p4 .visual-timeline-check { animation: checkPopAnim4 6s infinite linear; }
 
-@keyframes checkPopAnim {
-    0%, 5% { opacity: 0; transform: scale(0.5); }
-    10%, 95% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1); }
+@keyframes checkPopAnim1 {
+    0%, 4% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+    10%, 95% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(1); }
 }
 
 @keyframes checkPopAnim2 {
-    0%, 30% { opacity: 0; transform: scale(0.5); }
-    35%, 95% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1); }
+    0%, 19% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+    25%, 95% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(1); }
 }
 
 @keyframes checkPopAnim3 {
-    0%, 55% { opacity: 0; transform: scale(0.5); }
-    60%, 95% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1); }
+    0%, 44% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+    50%, 95% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(1); }
 }
 
 @keyframes checkPopAnim4 {
-    0%, 80% { opacity: 0; transform: scale(0.5); }
-    85%, 95% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1); }
+    0%, 69% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+    75%, 95% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(1); }
 }
 /* Slide 3: Pillars */
 .visual-pillars {
