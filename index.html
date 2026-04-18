@@ -62,10 +62,25 @@
 <button class="selector-idioma btn-opcion" id="btn-tutorial-no">No</button>
 </div>
 <div class="tutorial-paginas-contenedor" id="tutorial-paginas-contenedor">
-<div class="pagina-tutorial activa"><h1>Tutorial 1</h1></div>
-<div class="pagina-tutorial"><h1>Tutorial 2</h1></div>
-<div class="pagina-tutorial"><h1>Tutorial 3</h1></div>
-<div class="pagina-tutorial"><h1>Tutorial 4</h1></div>
+<div class="pagina-tutorial activa">
+    <h1 id="tut1-titulo" class="tutorial-titulo"></h1>
+    <p id="tut1-texto1" class="tutorial-texto"></p>
+    <p id="tut1-texto2" class="tutorial-texto"></p>
+    <p id="tut1-texto3" class="tutorial-texto"></p>
+</div>
+<div class="pagina-tutorial">
+    <h1 id="tut2-titulo" class="tutorial-titulo"></h1>
+    <p id="tut2-texto1" class="tutorial-texto"></p>
+    <p id="tut2-texto2" class="tutorial-texto"></p>
+</div>
+<div class="pagina-tutorial">
+    <h1 id="tut3-titulo" class="tutorial-titulo"></h1>
+    <p id="tut3-texto" class="tutorial-texto"></p>
+</div>
+<div class="pagina-tutorial">
+    <h1 id="tut4-titulo" class="tutorial-titulo"></h1>
+    <p id="tut4-texto" class="tutorial-texto"></p>
+</div>
 </div>
 <div class="tutorial-navegacion" id="tutorial-nav">
 <div class="boton-nav" id="btn-nav-izq">&lt;</div>
@@ -134,23 +149,45 @@
 
         // Textos para internacionalización
         const textos = {
-                        en: {
-                tituloSettings: 'Settings',
-                labelMusica: 'Music Volume',
-                labelIdioma: 'Language',
-                tituloTutorial: 'Do you want to see the tutorial?',
-                btnSi: 'Yes',
-                btnNo: 'No'
-            },
-                        es: {
-                tituloSettings: 'Ajustes',
-                labelMusica: 'Volumen Música',
-                labelIdioma: 'Idioma',
-                tituloTutorial: '¿Quieres ver el tutorial?',
-                btnSi: 'Sí',
-                btnNo: 'No'
-            }
-        };
+        en: {
+            tituloSettings: 'Settings',
+            labelMusica: 'Music Volume',
+            labelIdioma: 'Language',
+            tituloTutorial: 'Do you want to see the tutorial?',
+            btnSi: 'Yes',
+            btnNo: 'No',
+            tut1Titulo: 'Welcome to Our Limbo',
+            tut1Texto1: 'Your goal is to escape the legal limbo of many immigrants by surviving the passage of time. To win, you must progressively unlock these milestones: Work Permit, Approved Asylum, Permanent Residence (Green Card), and US Citizenship.',
+            tut1Texto2: 'Random Milestone Cards: During the game, you will unpredictably have the opportunity to advance your legal status to reach these milestones.',
+            tut1Texto3: 'Tight Victory: If you manage to survive the cost of the final card (Citizenship), you will automatically win the game on the next turn.',
+            tut2Titulo: 'Controls and Strategic Decision',
+            tut2Texto1: 'Make decisions by swiping the center card left or right. Before releasing it, watch the arrows (▲ or ▼) at the top to predict the consequences of your action.',
+            tut2Texto2: 'When facing a milestone card, you will have a Strategic Decision: you can reject it (swipe in one direction, which has no cost) or accept it (swipe in the other, which will drastically drain resources like Money, Health, or Hope due to the immense costs and stress of the system).',
+            tut3Titulo: 'Your Pillars of Survival',
+            tut3Texto: 'Keep your four resources balanced: Health, Economy, Hope, and Security. Be very careful with the high costs of the milestone cards; if any of these bars reaches zero, the system will defeat you and you will lose the game.',
+            tut4Titulo: 'Time and Reality',
+            tut4Texto: 'Every 3 decisions equal 1 year of survival in the system. Every situation you will face is based on real research and academic testimonies.'
+        },
+        es: {
+            tituloSettings: 'Ajustes',
+            labelMusica: 'Volumen Música',
+            labelIdioma: 'Idioma',
+            tituloTutorial: '¿Quieres ver el tutorial?',
+            btnSi: 'Sí',
+            btnNo: 'No',
+            tut1Titulo: 'Bienvenido a Nuestro Limbo',
+            tut1Texto1: 'Tu meta es escapar del limbo legal de muchos inmigrantes sobreviviendo el paso del tiempo. Para ganar, debes desbloquear estos hitos progresivamente: Permiso de Trabajo, Asilo Aprobado, Residencia Permanente (Green Card) y Ciudadanía Estadounidense.',
+            tut1Texto2: 'Cartas de Hito Aleatorias: Durante el juego, te aparecerá de forma impredecible la oportunidad de avanzar tu estatus legal para alcanzar estos hitos.',
+            tut1Texto3: 'Victoria Ajustada: Si logras sobrevivir al costo de la carta final (Ciudadanía), ganarás el juego automáticamente al siguiente turno.',
+            tut2Titulo: 'Los Controles y la Decisión Estratégica',
+            tut2Texto1: 'Toma decisiones deslizando la tarjeta central hacia la izquierda o la derecha. Antes de soltarla, observa las flechas (▲ o ▼) en la parte superior para predecir las consecuencias de tu acción.',
+            tut2Texto2: 'Cuando enfrentes una carta de hito, tendrás una Decisión Estratégica: podrás rechazarla (deslizar a una dirección, lo cual no tiene ningún costo) o aceptarla (deslizar a la otra, lo cual drenará drásticamente recursos como Dinero, Salud o Esperanza debido a los inmensos costos y estrés del sistema).',
+            tut3Titulo: 'Tus Pilares de Supervivencia',
+            tut3Texto: 'Mantén el equilibrio de tus cuatro recursos: Salud, Economía, Esperanza y Seguridad. Ten mucho cuidado con los altos costos de las cartas de hito; si cualquiera de estas barras llega a cero, el sistema te vencerá y perderás el juego.',
+            tut4Titulo: 'El Tiempo y la Realidad',
+            tut4Texto: 'Cada 3 decisiones equivalen a 1 año de supervivencia en el sistema. Cada situación que enfrentarás está basada en investigaciones reales y testimonios académicos.'
+        }
+    };
 
         const titleSettingsEl = document.querySelector('.titulo-settings');
         const labelMusicaEl = document.getElementById('label-musica');
@@ -296,6 +333,22 @@
             if (tituloTutorialEl) tituloTutorialEl.textContent = textos[idioma].tituloTutorial;
             if (btnTutorialSiEl) btnTutorialSiEl.textContent = textos[idioma].btnSi;
             if (btnTutorialNoEl) btnTutorialNoEl.textContent = textos[idioma].btnNo;
+
+            // Update tutorial text
+            document.getElementById('tut1-titulo').textContent = textos[idioma].tut1Titulo;
+            document.getElementById('tut1-texto1').textContent = textos[idioma].tut1Texto1;
+            document.getElementById('tut1-texto2').textContent = textos[idioma].tut1Texto2;
+            document.getElementById('tut1-texto3').textContent = textos[idioma].tut1Texto3;
+
+            document.getElementById('tut2-titulo').textContent = textos[idioma].tut2Titulo;
+            document.getElementById('tut2-texto1').textContent = textos[idioma].tut2Texto1;
+            document.getElementById('tut2-texto2').textContent = textos[idioma].tut2Texto2;
+
+            document.getElementById('tut3-titulo').textContent = textos[idioma].tut3Titulo;
+            document.getElementById('tut3-texto').textContent = textos[idioma].tut3Texto;
+
+            document.getElementById('tut4-titulo').textContent = textos[idioma].tut4Titulo;
+            document.getElementById('tut4-texto').textContent = textos[idioma].tut4Texto;
         });
 
         // Intentar iniciar la música inmediatamente al cargar la página
