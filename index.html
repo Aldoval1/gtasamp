@@ -81,15 +81,16 @@
 </div>
 <div class="pagina-tutorial">
     <h1 id="tut2-titulo" class="tutorial-titulo"></h1>
-    <div class="tutorial-visual">
-        <div class="visual-swipe-card">
-            <div class="visual-card-face">?</div>
-        </div>
-        <div class="visual-swipe-arrow left">▲</div>
-        <div class="visual-swipe-arrow right">▼</div>
-    </div>
     <p id="tut2-texto1" class="tutorial-texto"></p>
-    <p id="tut2-texto2" class="tutorial-texto"></p>
+    <div class="tutorial-visual">
+        <div class="visual-timeline">
+            <div class="visual-timeline-line"></div>
+            <div class="visual-timeline-point p1"><div class="visual-timeline-check">✓</div></div>
+            <div class="visual-timeline-point p2"><div class="visual-timeline-check">✓</div></div>
+            <div class="visual-timeline-point p3"><div class="visual-timeline-check">✓</div></div>
+            <div class="visual-timeline-point p4"><div class="visual-timeline-check">✓</div></div>
+        </div>
+    </div>
 </div>
 <div class="pagina-tutorial">
     <h1 id="tut3-titulo" class="tutorial-titulo"></h1>
@@ -190,8 +191,7 @@
             tut1Texto1: 'Your goal is to try to escape the legal limbo of many immigrants by making decisions according to the situation you are facing at the moment.',
             tut1Texto2: 'Make decisions by swiping the center card left or right. Before releasing it, watch the arrows (▲ or ▼) at the top to predict the consequences of your action.',
             tut2Titulo: 'Controls and Strategic Decision',
-            tut2Texto1: 'Make decisions by swiping the center card left or right. Before releasing it, watch the arrows (▲ or ▼) at the top to predict the consequences of your action.',
-            tut2Texto2: 'When facing a milestone card, you will have a Strategic Decision: you can reject it (swipe in one direction, which has no cost) or accept it (swipe in the other, which will drastically drain resources like Money, Health, or Hope due to the immense costs and stress of the system).',
+            tut2Texto1: 'To win you must collect 4 Milestones (Work Permit), (Court Resolution) (Green Card) (Citizenship) (cards that will appear randomly). Accepting them has a significant cost, so you will not always be able to afford it with your current situation, so you have to consider and take risks.',
             tut3Titulo: 'Your Pillars of Survival',
             tut3Texto: 'Keep your four resources balanced: Health, Economy, Hope, and Security. Be very careful with the high costs of the milestone cards; if any of these bars reaches zero, the system will defeat you and you will lose the game.',
             tut4Titulo: 'Time and Reality',
@@ -208,8 +208,7 @@
             tut1Texto1: 'Tu objetivo es tratar de escapar el limbo legal de muchos inmigrantes al tomar decisiones acorde a la situacion que estes afrontando en este momento.',
             tut1Texto2: 'Toma decisiones deslizando la tarjeta central hacia la izquierda o la derecha. Antes de soltarla, observa las flechas (▲ o ▼) en la parte superior para predecir las consecuencias de tu acción.',
             tut2Titulo: 'Los Controles y la Decisión Estratégica',
-            tut2Texto1: 'Toma decisiones deslizando la tarjeta central hacia la izquierda o la derecha. Antes de soltarla, observa las flechas (▲ o ▼) en la parte superior para predecir las consecuencias de tu acción.',
-            tut2Texto2: 'Cuando enfrentes una carta de hito, tendrás una Decisión Estratégica: podrás rechazarla (deslizar a una dirección, lo cual no tiene ningún costo) o aceptarla (deslizar a la otra, lo cual drenará drásticamente recursos como Dinero, Salud o Esperanza debido a los inmensos costos y estrés del sistema).',
+            tut2Texto1: 'Para ganar deberas de recolectar 4 Milestones (Permiso de Trabajo), (Resolucion de corte) (GreenCard) (Ciudadania) (cards que apareceran de manera aleatoria. El aceptarlas tiene un costo sigificativo, por lo que no siempre podras permitirtelo con tu situacion actual, por lo que tienes que considerar y tomar riesgos.',
             tut3Titulo: 'Tus Pilares de Supervivencia',
             tut3Texto: 'Mantén el equilibrio de tus cuatro recursos: Salud, Economía, Esperanza y Seguridad. Ten mucho cuidado con los altos costos de las cartas de hito; si cualquiera de estas barras llega a cero, el sistema te vencerá y perderás el juego.',
             tut4Titulo: 'El Tiempo y la Realidad',
@@ -369,7 +368,6 @@
 
             document.getElementById('tut2-titulo').textContent = textos[idioma].tut2Titulo;
             document.getElementById('tut2-texto1').textContent = textos[idioma].tut2Texto1;
-            document.getElementById('tut2-texto2').textContent = textos[idioma].tut2Texto2;
 
             document.getElementById('tut3-titulo').textContent = textos[idioma].tut3Titulo;
             document.getElementById('tut3-texto').textContent = textos[idioma].tut3Texto;
