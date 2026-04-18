@@ -535,3 +535,173 @@ input[type=range]::-webkit-slider-thumb {
 #titulo-tutorial {
     text-align: center;
 }
+
+
+/* --- Tutorial Animations --- */
+.tutorial-visual {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Slide 1: Document */
+.visual-doc {
+    width: 60px;
+    height: 80px;
+    border: 3px solid black;
+    border-radius: 5px;
+    background: white;
+    position: relative;
+    padding: 10px;
+    box-shadow: 2px 2px 0 black;
+}
+.visual-line {
+    width: 100%;
+    height: 4px;
+    background: black;
+    margin-bottom: 8px;
+    border-radius: 2px;
+}
+.visual-stamp {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    width: 50px;
+    height: 25px;
+    border: 3px solid red;
+    color: red;
+    font-family: 'Barriecito', system-ui;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-15deg) scale(2);
+    opacity: 0;
+}
+.pagina-tutorial.activa .visual-stamp {
+    animation: stampAnim 2s infinite ease-in;
+}
+.visual-stamp::after {
+    content: "OK";
+}
+@keyframes stampAnim {
+    0%, 50% { opacity: 0; transform: rotate(-15deg) scale(2); }
+    60% { opacity: 1; transform: rotate(-15deg) scale(0.9); }
+    65% { opacity: 1; transform: rotate(-15deg) scale(1); }
+    100% { opacity: 1; transform: rotate(-15deg) scale(1); }
+}
+
+/* Slide 2: Swiping Card */
+.visual-swipe-card {
+    width: 70px;
+    height: 100px;
+    border: 3px solid black;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Barriecito', system-ui;
+    font-size: 2rem;
+    box-shadow: 2px 2px 0 black;
+    z-index: 2;
+}
+.pagina-tutorial.activa .visual-swipe-card {
+    animation: swipeAnim 3s infinite ease-in-out;
+}
+.visual-swipe-arrow {
+    position: absolute;
+    font-size: 1.5rem;
+    color: black;
+    opacity: 0;
+}
+.visual-swipe-arrow.left { left: 30%; }
+.visual-swipe-arrow.right { right: 30%; }
+.pagina-tutorial.activa .visual-swipe-arrow.left { animation: arrowLeftAnim 3s infinite ease-in-out; }
+.pagina-tutorial.activa .visual-swipe-arrow.right { animation: arrowRightAnim 3s infinite ease-in-out; }
+
+@keyframes swipeAnim {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-40px) rotate(-10deg); }
+    50% { transform: translateX(0) rotate(0); }
+    75% { transform: translateX(40px) rotate(10deg); }
+}
+@keyframes arrowLeftAnim {
+    0%, 15%, 35%, 100% { opacity: 0; transform: scale(0.5); }
+    25% { opacity: 1; transform: scale(1.5); color: green; }
+}
+@keyframes arrowRightAnim {
+    0%, 65%, 85%, 100% { opacity: 0; transform: scale(0.5); }
+    75% { opacity: 1; transform: scale(1.5); color: red; }
+}
+
+/* Slide 3: Pillars */
+.visual-pillars {
+    gap: 15px;
+    align-items: flex-end;
+}
+.visual-bar-container {
+    width: 20px;
+    height: 80px;
+    border: 2px solid black;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+.visual-bar {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: black;
+    border-radius: 0;
+}
+.pagina-tutorial.activa .visual-bar.bar1 { animation: barAnim1 2s infinite alternate ease-in-out; }
+.pagina-tutorial.activa .visual-bar.bar2 { animation: barAnim2 2.5s infinite alternate ease-in-out; }
+.pagina-tutorial.activa .visual-bar.bar3 { animation: barAnim3 1.8s infinite alternate ease-in-out; }
+.pagina-tutorial.activa .visual-bar.bar4 { animation: barAnim4 2.2s infinite alternate ease-in-out; }
+
+@keyframes barAnim1 { 0% { height: 20%; } 100% { height: 80%; background: green;} }
+@keyframes barAnim2 { 0% { height: 90%; } 100% { height: 30%; background: red;} }
+@keyframes barAnim3 { 0% { height: 40%; } 100% { height: 70%; background: black;} }
+@keyframes barAnim4 { 0% { height: 60%; } 100% { height: 10%; background: red;} }
+
+/* Slide 4: Clock */
+.visual-clock {
+    width: 60px;
+    height: 60px;
+    border: 4px solid black;
+    border-radius: 50%;
+    position: relative;
+}
+.visual-hand-min, .visual-hand-hour {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    background: black;
+    transform-origin: bottom center;
+    border-radius: 2px;
+}
+.visual-hand-min {
+    width: 2px;
+    height: 25px;
+    margin-left: -1px;
+}
+.pagina-tutorial.activa .visual-hand-min {
+    animation: clockMinAnim 2s infinite linear;
+}
+.visual-hand-hour {
+    width: 4px;
+    height: 15px;
+    margin-left: -2px;
+}
+.pagina-tutorial.activa .visual-hand-hour {
+    animation: clockHourAnim 24s infinite linear;
+}
+
+@keyframes clockMinAnim { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes clockHourAnim { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
