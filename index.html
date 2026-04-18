@@ -299,7 +299,15 @@
             if (paginaTutorialActual < paginasTutorial.length - 1) {
                 paginaTutorialActual++;
                 actualizarPaginacionTutorial();
+            } else {
+                // Navigate to game
+                window.location.href = 'game.html';
             }
+        });
+
+        btnTutorialNoEl.addEventListener('click', () => {
+            playClickSound();
+            window.location.href = 'game.html';
         });
 
         btnTutorialSiEl.addEventListener('click', () => {

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Limbo - Juego</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barriecito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <!-- Background Clouds -->
+    <div class="nubes-fondo" id="nubes-container"></div>
+
+    <div class="game-container">
+        <!-- Top Status Bars -->
+        <div class="status-container">
+            <div class="status-col">
+                <span class="status-label">Health</span>
+                <div class="status-bar-bg"><div class="status-bar-fill" id="bar-health" style="width: 50%;"></div></div>
+            </div>
+            <div class="status-col">
+                <span class="status-label">Economy</span>
+                <div class="status-bar-bg"><div class="status-bar-fill" id="bar-economy" style="width: 50%;"></div></div>
+            </div>
+            <div class="status-col">
+                <span class="status-label">Hope</span>
+                <div class="status-bar-bg"><div class="status-bar-fill" id="bar-hope" style="width: 50%;"></div></div>
+            </div>
+            <div class="status-col">
+                <span class="status-label">Security</span>
+                <div class="status-bar-bg"><div class="status-bar-fill" id="bar-security" style="width: 50%;"></div></div>
+            </div>
+        </div>
+
+        <!-- Milestones -->
+        <div class="milestones-container">
+            <div class="milestone-icon" id="ms-work">💼</div>
+            <div class="milestone-line"></div>
+            <div class="milestone-icon" id="ms-court">⚖️</div>
+            <div class="milestone-line"></div>
+            <div class="milestone-icon" id="ms-greencard">🟩</div>
+            <div class="milestone-line"></div>
+            <div class="milestone-icon" id="ms-citizen">🦅</div>
+        </div>
+
+        <!-- Main Card Area -->
+        <div class="card-area" id="card-area">
+            <div class="card" id="active-card">
+                <div class="card-image-container" id="card-image">
+                    <!-- SVG Image will be injected here -->
+                </div>
+                <div class="card-text-container">
+                    <h3 id="card-title">Cargando...</h3>
+                    <p id="card-desc">Conectando al sistema...</p>
+                </div>
+            </div>
+            <div class="swipe-indicator left" id="swipe-left">◀ Rechazar</div>
+            <div class="swipe-indicator right" id="swipe-right">Aceptar ▶</div>
+        </div>
+    </div>
+
+    <!-- Admin Console Overlay -->
+    <div class="admin-overlay" id="admin-overlay" style="display: none;">
+        <div class="admin-console">
+            <div class="admin-header">Admin Console</div>
+            <div class="admin-log" id="admin-log">
+                <div>[SYSTEM] Ingrese contraseña:</div>
+            </div>
+            <input type="text" class="admin-input" id="admin-input" autocomplete="off" autofocus>
+        </div>
+    </div>
+
+    <!-- GameOver Overlay -->
+    <div class="modal-oculto" id="modal-gameover">
+        <div class="modal-contenido">
+            <h2 class="titulo-settings">El sistema te ha vencido.</h2>
+            <p style="text-align:center; font-family: system-ui;">Tus recursos han llegado a cero.</p>
+            <button class="selector-idioma btn-opcion" id="btn-restart" style="margin-top: 20px;">Intentar de Nuevo</button>
+        </div>
+    </div>
+
+    <!-- Victory Overlay -->
+    <div class="modal-oculto" id="modal-victory">
+        <div class="modal-contenido">
+            <h2 class="titulo-settings">¡Sobreviviste!</h2>
+            <p style="text-align:center; font-family: system-ui;">Lograste superar el limbo legal.</p>
+            <button class="selector-idioma btn-opcion" id="btn-victory-restart" style="margin-top: 20px;">Jugar de Nuevo</button>
+        </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bg-music" src="Liminal Save Screen.mp3" loop autoplay></audio>
+    <audio id="click-sound" src="freesound_community-menu-selection-1022.wav"></audio>
+
+    <!-- Scripts -->
+    <script src="game.js"></script>
+</body>
+</html>
