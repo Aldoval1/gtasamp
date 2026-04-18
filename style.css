@@ -496,6 +496,9 @@ input[type=range]::-webkit-slider-thumb {
 
 .pagina-tutorial.activa {
     opacity: 1;
+}
+
+.tutorial-paginas-contenedor.mostrar .pagina-tutorial.activa {
     pointer-events: auto;
 }
 
