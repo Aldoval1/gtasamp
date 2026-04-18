@@ -626,11 +626,20 @@ input[type=range]::-webkit-slider-thumb {
 }
 .visual-timeline-line {
     position: absolute;
-    width: 100%;
+    width: 0%;
     height: 4px;
     background: black;
     border-radius: 2px;
 }
+.pagina-tutorial.activa .visual-timeline-line {
+    animation: drawLineAnim 4s infinite linear;
+}
+
+@keyframes drawLineAnim {
+    0% { width: 0%; }
+    80%, 100% { width: 100%; }
+}
+
 .visual-timeline-point {
     position: absolute;
     width: 12px;
@@ -648,26 +657,50 @@ input[type=range]::-webkit-slider-thumb {
 
 .visual-timeline-check {
     position: absolute;
-    top: -25px;
-    left: -5px;
+    top: 20px;
+    left: -10px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
     font-family: 'Barriecito', system-ui;
     font-size: 1.2rem;
     color: black;
     opacity: 0;
 }
 
-.pagina-tutorial.activa .visual-timeline-point.p1 .visual-timeline-check { animation: checkAnim 4s infinite linear 0.5s; }
-.pagina-tutorial.activa .visual-timeline-point.p2 .visual-timeline-check { animation: checkAnim 4s infinite linear 1.5s; }
-.pagina-tutorial.activa .visual-timeline-point.p3 .visual-timeline-check { animation: checkAnim 4s infinite linear 2.5s; }
-.pagina-tutorial.activa .visual-timeline-point.p4 .visual-timeline-check { animation: checkAnim 4s infinite linear 3.5s; }
+.pagina-tutorial.activa .visual-timeline-point.p1 .visual-timeline-check { animation: checkPopAnim 4s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p2 .visual-timeline-check { animation: checkPopAnim2 4s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p3 .visual-timeline-check { animation: checkPopAnim3 4s infinite linear; }
+.pagina-tutorial.activa .visual-timeline-point.p4 .visual-timeline-check { animation: checkPopAnim4 4s infinite linear; }
 
-@keyframes checkAnim {
-    0% { opacity: 0; transform: translateY(10px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; }
-    100% { opacity: 0; }
+@keyframes checkPopAnim {
+    0%, 5% { opacity: 0; transform: scale(0.5); }
+    10%, 95% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
 }
 
+@keyframes checkPopAnim2 {
+    0%, 30% { opacity: 0; transform: scale(0.5); }
+    35%, 95% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes checkPopAnim3 {
+    0%, 55% { opacity: 0; transform: scale(0.5); }
+    60%, 95% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes checkPopAnim4 {
+    0%, 80% { opacity: 0; transform: scale(0.5); }
+    85%, 95% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
 /* Slide 3: Pillars */
 .visual-pillars {
     gap: 15px;
