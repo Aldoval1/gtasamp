@@ -64,16 +64,20 @@
 <div class="tutorial-paginas-contenedor" id="tutorial-paginas-contenedor">
 <div class="pagina-tutorial activa">
     <h1 id="tut1-titulo" class="tutorial-titulo"></h1>
-    <div class="tutorial-visual">
-        <div class="visual-doc">
-            <div class="visual-line"></div>
-            <div class="visual-line"></div>
-            <div class="visual-stamp"></div>
-        </div>
-    </div>
     <p id="tut1-texto1" class="tutorial-texto"></p>
     <p id="tut1-texto2" class="tutorial-texto"></p>
-    <p id="tut1-texto3" class="tutorial-texto"></p>
+    <div class="tutorial-visual">
+        <div class="visual-deck">
+            <div class="visual-card-back"></div>
+            <div class="visual-card-back" style="bottom: 4px; left: 4px;"></div>
+            <div class="visual-card-back" style="bottom: 8px; left: 8px;"></div>
+            <div class="visual-swipe-card deck-top">
+                <div class="visual-card-face">?</div>
+            </div>
+            <div class="visual-swipe-arrow left">▲</div>
+            <div class="visual-swipe-arrow right">▼</div>
+        </div>
+    </div>
 </div>
 <div class="pagina-tutorial">
     <h1 id="tut2-titulo" class="tutorial-titulo"></h1>
@@ -183,9 +187,8 @@
             btnSi: 'Yes',
             btnNo: 'No',
             tut1Titulo: 'Welcome to Our Limbo',
-            tut1Texto1: 'Your goal is to escape the legal limbo of many immigrants by surviving the passage of time. To win, you must progressively unlock these milestones: Work Permit, Approved Asylum, Permanent Residence (Green Card), and US Citizenship.',
-            tut1Texto2: 'Random Milestone Cards: During the game, you will unpredictably have the opportunity to advance your legal status to reach these milestones.',
-            tut1Texto3: 'Tight Victory: If you manage to survive the cost of the final card (Citizenship), you will automatically win the game on the next turn.',
+            tut1Texto1: 'Your goal is to try to escape the legal limbo of many immigrants by making decisions according to the situation you are facing at the moment.',
+            tut1Texto2: 'Make decisions by swiping the center card left or right. Before releasing it, watch the arrows (▲ or ▼) at the top to predict the consequences of your action.',
             tut2Titulo: 'Controls and Strategic Decision',
             tut2Texto1: 'Make decisions by swiping the center card left or right. Before releasing it, watch the arrows (▲ or ▼) at the top to predict the consequences of your action.',
             tut2Texto2: 'When facing a milestone card, you will have a Strategic Decision: you can reject it (swipe in one direction, which has no cost) or accept it (swipe in the other, which will drastically drain resources like Money, Health, or Hope due to the immense costs and stress of the system).',
@@ -202,9 +205,8 @@
             btnSi: 'Sí',
             btnNo: 'No',
             tut1Titulo: 'Bienvenido a Nuestro Limbo',
-            tut1Texto1: 'Tu meta es escapar del limbo legal de muchos inmigrantes sobreviviendo el paso del tiempo. Para ganar, debes desbloquear estos hitos progresivamente: Permiso de Trabajo, Asilo Aprobado, Residencia Permanente (Green Card) y Ciudadanía Estadounidense.',
-            tut1Texto2: 'Cartas de Hito Aleatorias: Durante el juego, te aparecerá de forma impredecible la oportunidad de avanzar tu estatus legal para alcanzar estos hitos.',
-            tut1Texto3: 'Victoria Ajustada: Si logras sobrevivir al costo de la carta final (Ciudadanía), ganarás el juego automáticamente al siguiente turno.',
+            tut1Texto1: 'Tu objetivo es tratar de escapar el limbo legal de muchos inmigrantes al tomar decisiones acorde a la situacion que estes afrontando en este momento.',
+            tut1Texto2: 'Toma decisiones deslizando la tarjeta central hacia la izquierda o la derecha. Antes de soltarla, observa las flechas (▲ o ▼) en la parte superior para predecir las consecuencias de tu acción.',
             tut2Titulo: 'Los Controles y la Decisión Estratégica',
             tut2Texto1: 'Toma decisiones deslizando la tarjeta central hacia la izquierda o la derecha. Antes de soltarla, observa las flechas (▲ o ▼) en la parte superior para predecir las consecuencias de tu acción.',
             tut2Texto2: 'Cuando enfrentes una carta de hito, tendrás una Decisión Estratégica: podrás rechazarla (deslizar a una dirección, lo cual no tiene ningún costo) o aceptarla (deslizar a la otra, lo cual drenará drásticamente recursos como Dinero, Salud o Esperanza debido a los inmensos costos y estrés del sistema).',
@@ -364,7 +366,6 @@
             document.getElementById('tut1-titulo').textContent = textos[idioma].tut1Titulo;
             document.getElementById('tut1-texto1').textContent = textos[idioma].tut1Texto1;
             document.getElementById('tut1-texto2').textContent = textos[idioma].tut1Texto2;
-            document.getElementById('tut1-texto3').textContent = textos[idioma].tut1Texto3;
 
             document.getElementById('tut2-titulo').textContent = textos[idioma].tut2Titulo;
             document.getElementById('tut2-texto1').textContent = textos[idioma].tut2Texto1;
