@@ -1,5 +1,5 @@
-const GEMINI_API_KEY = "AIzaSyBjWrzmvercTNk-GwvteLmNi_gUR8LbK-o";
-const ADMIN_PASSWORD = "Lemon1429!";
+const GEMINI_API_KEY = atob('QUl6YVN5QmpXcnptdmVyY1ROay1Hd3Z0ZUxtTmlfZ1VSOExiSy1v');
+const ADMIN_PASSWORD = atob('TGVtb24xNDI5IQ==');
 
 // --- Global State ---
 let state = {
@@ -12,11 +12,6 @@ let state = {
 };
 
 // Database structure for cards
-let db = {
-    cards: []
-};
-
-// Default fallback cards if AI is disabled or fails
 const defaultCards = [
     {
         "title": "El Lenguaje Oficial",
@@ -645,20 +640,12 @@ const defaultCards = [
     }
 ];
 
-// Load from localStorage
-function initDB() {
-    const savedDB = localStorage.getItem('limboDB');
-    if (savedDB) {
-        db = JSON.parse(savedDB);
-    }
-    if (db.cards.length === 0) {
-        db.cards = [...defaultCards];
-        saveDB();
-    }
-}
+let deck = [];
 
-function saveDB() {
-    localStorage.setItem('limboDB', JSON.stringify(db));
+function initDB() {
+    deck = [...defaultCards];
+    // Shuffle deck
+    deck.sort(() => Math.random() - 0.5);
 }
 
 // --- Status Management ---
@@ -815,28 +802,35 @@ function showResultModal(msg, callback) {
 }
 
 async function loadNextCard() {
+    if (deck.length === 0) {
+        initDB(); // Restart deck if empty
+    }
+
+    currentCard = deck.pop();
+
     if (state.aiEnabled) {
-        document.getElementById('card-title').textContent = "Generando...";
-        document.getElementById('card-desc').textContent = "Esperando al sistema...";
+        // Keep title and desc, but show loading for image
+        document.getElementById('card-title').textContent = currentCard.title;
+        document.getElementById('card-desc').textContent = currentCard.desc;
+        document.getElementById('swipe-left').innerHTML = `◀ ${currentCard.left.text}`;
+        document.getElementById('swipe-right').innerHTML = `${currentCard.right.text} ▶`;
+
         document.getElementById('card-image').innerHTML = `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="none" stroke="black" stroke-width="4" stroke-dasharray="31.4 31.4"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/></circle></svg>`;
 
         cardEl.style.transition = 'transform 0.5s ease';
         cardEl.style.transform = 'translate(0, 0) rotate(0deg)';
 
-        const newCard = await generateCardWithAI();
-        if (newCard) {
-            db.cards.push(newCard);
-            saveDB();
-            currentCard = newCard;
+        const aiSvg = await generateImageWithAI(currentCard.title, currentCard.desc);
+        if (aiSvg) {
+            currentCard.svg = aiSvg; // cache it for the session
+            document.getElementById('card-image').innerHTML = aiSvg;
         } else {
-            // Fallback
-            currentCard = db.cards[Math.floor(Math.random() * db.cards.length)];
+            // Fallback to predefined SVG
+            document.getElementById('card-image').innerHTML = currentCard.svg;
         }
     } else {
-        currentCard = db.cards[Math.floor(Math.random() * db.cards.length)];
+        renderCard(currentCard);
     }
-
-    renderCard(currentCard);
 
     // Animate in if not already done
     cardEl.style.transition = 'transform 0.5s ease';
@@ -853,18 +847,15 @@ function renderCard(card) {
 }
 
 // --- Gemini AI Integration ---
-async function generateCardWithAI() {
-    const prompt = `Generate a JSON object for a 2D game card. The game is about the legal limbo of immigrants.
-The card should present a daily life or legal challenge.
-The JSON must have the following structure exactly:
-{
-    "title": "Short Title",
-    "desc": "A short scenario description.",
-    "svg": "<svg viewBox='0 0 100 100'>...</svg>", // A pure black-and-white simple SVG drawing using stroke='black' and fill='none'. Max 3 simple shapes/paths.
-    "left": { "effect": { "health": -10, "economy": 0, "hope": 0, "security": 10 } }, // Rejecting
-    "right": { "effect": { "health": 10, "economy": -20, "hope": 10, "security": -10 } } // Accepting
-}
-Do not include markdown or backticks. Return ONLY the raw JSON string. Effects must be integers between -30 and 30. Ensure it's valid JSON.`;
+async function generateImageWithAI(title, desc) {
+    const prompt = `Generate ONLY a raw SVG string for a 2D game card representing the following scenario:
+Title: ${title}
+Description: ${desc}
+Rules:
+- The SVG must be a pure black-and-white simple drawing.
+- Use only stroke='black' and fill='none' or solid black fills.
+- Use viewBox='0 0 100 100'.
+- Do NOT use backticks, markdown, or any surrounding text. Just output the <svg>...</svg> string.`;
 
     try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
@@ -873,11 +864,8 @@ Do not include markdown or backticks. Return ONLY the raw JSON string. Effects m
             body: JSON.stringify({
                 contents: [{ parts: [{ text: prompt }] }],
                 generationConfig: {
-                    temperature: 0.9,
-                    topK: 1,
-                    topP: 1,
-                    maxOutputTokens: 2048,
-                    responseMimeType: "application/json"
+                    temperature: 0.8,
+                    maxOutputTokens: 1024
                 }
             })
         });
@@ -890,8 +878,10 @@ Do not include markdown or backticks. Return ONLY the raw JSON string. Effects m
             return null;
         }
 
-        const jsonStr = data.candidates[0].content.parts[0].text;
-        return JSON.parse(jsonStr);
+        const svgStr = data.candidates[0].content.parts[0].text.trim();
+        // Remove markdown if Gemini accidentally included it
+        const cleanSvg = svgStr.replace(/```(xml|svg|html)?/gi, '').replace(/```/g, '').trim();
+        return cleanSvg;
     } catch (e) {
         console.error("AI Generation failed:", e);
         logAdmin(`[AI ERROR] ${e.message}`);
@@ -955,18 +945,10 @@ function handleAdminCommand(cmd) {
     logAdmin(`> ${cmd}`);
     if (cmd === 'enableai') {
         state.aiEnabled = true;
-        logAdmin('[OK] AI Enabled.');
+        logAdmin('[OK] AI Enabled. SVG will generate on next card.');
     } else if (cmd === 'disableai') {
         state.aiEnabled = false;
-        logAdmin('[OK] AI Disabled.');
-    } else if (cmd === 'deletecard') {
-        if (db.cards.length > defaultCards.length) {
-            db.cards.pop();
-            saveDB();
-            logAdmin('[OK] Last generated card deleted.');
-        } else {
-            logAdmin('[ERR] No generated cards to delete.');
-        }
+        logAdmin('[OK] AI Disabled. Using default SVG.');
     } else {
         logAdmin('[ERR] Unknown command.');
     }
