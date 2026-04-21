@@ -120,6 +120,7 @@ const defaultCards = [
     {
         "title": "El Ret\u00e9n de Tr\u00e1nsito",
         "desc": "Conduces hacia tu trabajo y te topas con un control policial aleatorio. Las leyes estatales recientes son hostiles con los inmigrantes.",
+        "img": "images/c5_reten.jpg",
         "svg": "<svg viewBox='0 0 100 100'><circle cx='30' cy='70' r='10' fill='none' stroke='black' stroke-width='3'/><circle cx='70' cy='70' r='10' fill='none' stroke='black' stroke-width='3'/><path d='M10 70 L10 40 L40 40 L60 20 L90 20 L90 70 Z' fill='none' stroke='black' stroke-width='3'/></svg>",
         "right": {
             "text": "Mostrar I-220A",
@@ -223,6 +224,7 @@ const defaultCards = [
     {
         "title": "Tributo sin Representaci\u00f3n",
         "desc": "Es temporada de impuestos. Debes declarar usando un n\u00famero ITIN, aportando al sistema sin recibir beneficios sociales a cambio.",
+        "img": "images/c9_tributo.jpg",
         "svg": "<svg viewBox='0 0 100 100'><polygon points='20,20 80,20 60,80 40,80' fill='none' stroke='black' stroke-width='3'/><line x1='50' y1='30' x2='50' y2='70' stroke='black' stroke-width='3'/></svg>",
         "right": {
             "text": "Pagar impuestos",
@@ -274,6 +276,7 @@ const defaultCards = [
     {
         "title": "Inspecci\u00f3n Inesperada",
         "desc": "Circula el rumor de que agentes de inmigraci\u00f3n est\u00e1n haciendo auditor\u00edas sorpresa en los negocios de tu zona laboral.",
+        "img": "images/c11_inspeccion.jpg",
         "svg": "<svg viewBox='0 0 100 100'><path d='M20 80 Q50 20 80 80' fill='none' stroke='black' stroke-width='3'/><circle cx='50' cy='50' r='10' fill='black'/></svg>",
         "right": {
             "text": "Faltar al trabajo",
@@ -299,6 +302,7 @@ const defaultCards = [
     {
         "title": "La Oportunidad Acad\u00e9mica",
         "desc": "Te aceptan en una clase avanzada que podr\u00eda mejorar tu futuro, pero el I-220A te impide acceder a ayuda financiera federal.",
+        "img": "images/c12_academica.jpg",
         "svg": "<svg viewBox='0 0 100 100'><path d='M20 50 L50 20 L80 50' fill='none' stroke='black' stroke-width='3'/><rect x='30' y='50' width='40' height='30' fill='none' stroke='black' stroke-width='3'/></svg>",
         "right": {
             "text": "Pagar matr\u00edcula",
@@ -376,6 +380,7 @@ const defaultCards = [
     {
         "title": "Conducci\u00f3n en el Limbo",
         "desc": "Tienes un trabajo excelente, pero est\u00e1 lejos y en tu estado el I-220A no te permite tramitar una licencia de conducir.",
+        "img": "images/c15_conduccion.jpg",
         "svg": "<svg viewBox='0 0 100 100'><circle cx='50' cy='50' r='30' fill='none' stroke='black' stroke-width='4'/><circle cx='50' cy='50' r='10' fill='none' stroke='black' stroke-width='2'/><path d='M50 20 L50 40 M50 60 L50 80 M20 50 L40 50 M60 50 L80 50' stroke='black' stroke-width='3'/></svg>",
         "right": {
             "text": "Conducir sin licencia",
@@ -609,6 +614,7 @@ const defaultCards = [
     {
         "title": "La Protesta C\u00edvica",
         "desc": "Activistas organizan una marcha pac\u00edfica para pedir soluciones. Te invitan a unirte para darle rostro a la crisis.",
+        "img": "images/c24_protesta.jpg",
         "svg": "<svg viewBox='0 0 100 100'><rect x='30' y='20' width='40' height='30' fill='none' stroke='black' stroke-width='3'/><line x1='50' y1='50' x2='50' y2='90' stroke='black' stroke-width='3'/></svg>",
         "right": {
             "text": "Asistir a marcha",
