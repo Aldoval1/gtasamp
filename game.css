@@ -233,9 +233,10 @@ body {
     border-radius: 5px;
 }
 
-.floating-card {
+.floating-wrapper {
     animation: floatAnim 4s infinite ease-in-out;
 }
+
 
 @keyframes floatAnim {
     0%, 100% { transform: translateY(0); }

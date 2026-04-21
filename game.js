@@ -808,7 +808,6 @@ window.addEventListener('touchend', dragEnd);
 function dragStart(e) {
     if (e.target.closest('#admin-overlay')) return;
     isDragging = true;
-    cardEl.classList.remove('floating-card');
     startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
     cardEl.style.transition = 'none';
 }
@@ -844,12 +843,14 @@ function showPredictions(effect) {
 
     ['health', 'economy', 'hope', 'security'].forEach(key => {
         const val = effect[key];
-        if (val) {
-            const indicator = document.getElementById(`pred-${key}`);
-            if (indicator) {
+        const indicator = document.getElementById(`pred-${key}`);
+        if (indicator) {
+            if (val !== undefined && val !== 0) {
                 indicator.textContent = val > 0 ? '▲' : '▼';
                 indicator.style.color = val > 0 ? 'green' : 'red';
                 indicator.style.opacity = 1;
+            } else {
+                indicator.style.opacity = 0;
             }
         }
     });
@@ -877,7 +878,6 @@ function dragEnd(e) {
         handleSwipe('left');
     } else {
         cardEl.style.transform = 'translate(0, 0) rotate(0deg)';
-        cardEl.classList.add('floating-card');
     }
     currentX = 0;
 }
@@ -991,8 +991,6 @@ function renderCard(card) {
 
     document.getElementById('swipe-left').innerHTML = `◀ ${card.left.text}`;
     document.getElementById('swipe-right').innerHTML = `${card.right.text} ▶`;
-
-    cardEl.classList.add('floating-card');
 }
 
 // --- Gemini AI Integration ---
