@@ -215,3 +215,29 @@ body {
     outline: none;
     width: 100%;
 }
+
+
+.pred-indicator {
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 20px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    margin-bottom: 2px;
+}
+
+.card-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.floating-card {
+    animation: floatAnim 4s infinite ease-in-out;
+}
+
+@keyframes floatAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
