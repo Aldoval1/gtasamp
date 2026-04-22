@@ -76,6 +76,10 @@
         </div>
     </div>
 
+
+    <!-- Years Counter -->
+    <div class="years-counter" id="years-counter">Año 0</div>
+
     <!-- Admin Console Overlay -->
     <div class="admin-overlay" id="admin-overlay" style="display: none;">
         <div class="admin-console">
@@ -98,12 +102,11 @@
     </div>
 
     <!-- GameOver Overlay -->
-
-    <div class="modal-oculto" id="modal-gameover">
-        <div class="modal-contenido">
-            <h2 class="titulo-settings">El sistema te ha vencido.</h2>
-            <p style="text-align:center; font-family: system-ui;">Tus recursos han llegado a cero.</p>
-            <button class="selector-idioma btn-opcion" id="btn-restart" style="margin-top: 20px;">Intentar de Nuevo</button>
+    <div class="modal-oculto fullscreen-white" id="modal-gameover">
+        <div class="gameover-content">
+            <h2 class="titulo-settings" id="go-years">Sobreviviste 0 Años</h2>
+            <p id="go-reason" style="text-align:center; font-family: system-ui; font-size: 1.5rem; margin-top: 10px;">Razón</p>
+            <button class="selector-idioma btn-opcion" id="btn-restart" style="margin-top: 40px;">Intentar de Nuevo</button>
         </div>
     </div>
 
