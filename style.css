@@ -623,6 +623,9 @@ input[type=range]::-webkit-slider-thumb {
     height: 40px;
     display: flex;
     align-items: center;
+    transform: scale(1.5);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .visual-timeline-line {
     position: absolute;
