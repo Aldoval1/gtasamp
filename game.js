@@ -1325,25 +1325,10 @@ function updateUI() {
 }
 
 function applyEffect(effect, isMilestone = null) {
-    let diff = localStorage.getItem('limboDificultad') || 'normal';
-    let multiplier = diff === 'easy' ? 0.5 : 1;
-
-    // Calculate modified effects without mutating the original object
-    let healthChange = effect.health || 0;
-    let economyChange = effect.economy || 0;
-    let hopeChange = effect.hope || 0;
-    let securityChange = effect.security || 0;
-
-    if (healthChange < 0) healthChange = Math.round(healthChange * multiplier);
-    if (economyChange < 0) economyChange = Math.round(economyChange * multiplier);
-    if (hopeChange < 0) hopeChange = Math.round(hopeChange * multiplier);
-    if (securityChange < 0) securityChange = Math.round(securityChange * multiplier);
-
-    if (healthChange) state.health = Math.max(0, Math.min(100, state.health + healthChange));
-    if (economyChange) state.economy = Math.max(0, Math.min(100, state.economy + economyChange));
-    if (hopeChange) state.hope = Math.max(0, Math.min(100, state.hope + hopeChange));
-    if (securityChange) state.security = Math.max(0, Math.min(100, state.security + securityChange));
-
+    if (effect.health) state.health = Math.max(0, Math.min(100, state.health + effect.health));
+    if (effect.economy) state.economy = Math.max(0, Math.min(100, state.economy + effect.economy));
+    if (effect.hope) state.hope = Math.max(0, Math.min(100, state.hope + effect.hope));
+    if (effect.security) state.security = Math.max(0, Math.min(100, state.security + effect.security));
     if (isMilestone) {
         state.milestones[isMilestone] = true;
     }
@@ -1554,7 +1539,7 @@ async function loadNextCard() {
 
     // 25% chance to draw a milestone if unachieved ones exist
     const unachieved = milestoneCards.filter(ms => !state.milestones[ms.milestone]);
-    if (unachieved.length > 0 && Math.random() < (localStorage.getItem('limboDificultad') === 'easy' ? 0.40 : 0.25)) {
+    if (unachieved.length > 0 && Math.random() < 0.25) {
         // Pick a random unachieved milestone
         currentCard = unachieved[Math.floor(Math.random() * unachieved.length)];
     } else {
@@ -1737,15 +1722,3 @@ document.getElementById('btn-restart').addEventListener('click', () => location.
 document.getElementById('btn-exit').addEventListener('click', () => window.location.href = 'index.html');
 document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());
 document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());
-
-// --- Difficulty listener ---
-document.addEventListener('DOMContentLoaded', () => {
-    const diffSelector = document.getElementById('selector-dificultad');
-    if (diffSelector) {
-        const savedDiff = localStorage.getItem('limboDificultad') || 'normal';
-        diffSelector.value = savedDiff;
-        diffSelector.addEventListener('change', (e) => {
-            localStorage.setItem('limboDificultad', e.target.value);
-        });
-    }
-});

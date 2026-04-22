@@ -48,13 +48,13 @@
 <option value="es">Español</option>
 </select>
 </div>
-<div class="opcion-grupo">
-<label id="label-dificultad">Difficulty</label>
-<select class="selector-idioma" id="selector-dificultad">
-<option value="normal">Normal</option>
-<option value="easy">Easy</option>
-</select>
+
+<div class="opcion-grupo" style="margin-top: 20px; text-align: center; border-top: 1px solid #000; padding-top: 10px;">
+    <a href="https://docs.google.com/document/d/1dg4HtPyEC_0yAq4SSrJXJCqM3YiqBHovSBuBVrouo4c/edit?usp=sharing" target="_blank" style="display: block; color: black; text-decoration: underline; margin-bottom: 8px; font-family: system-ui;">Research Paper</a>
+    <a href="#" target="_blank" style="display: block; color: black; text-decoration: underline; margin-bottom: 8px; font-family: system-ui;">Bibliografia</a>
+    <a href="#" target="_blank" style="display: block; color: black; text-decoration: underline; font-family: system-ui;">AI Disclosure</a>
 </div>
+
 </div>
 </div>
 </div>
@@ -423,29 +423,6 @@
                 musicaIniciada = true;
             }
         });
-
-        // --- Modal Bibliografía ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnBibliography = document.getElementById('link-bibliography');
-            const contBibliography = document.getElementById('contenedor-bibliography');
-            const cerrarBibliography = document.getElementById('cerrar-bibliography');
-
-            btnBibliography.addEventListener('click', (e) => {
-                e.preventDefault();
-                contBibliography.classList.add('mostrar');
-                document.getElementById('footer-links').style.display = 'none';
-            });
-
-            cerrarBibliography.addEventListener('click', () => {
-                contBibliography.classList.remove('mostrar');
-                document.getElementById('footer-links').style.display = 'flex';
-            });
-        });
 </script>
-
-<div style="position: absolute; bottom: 10px; width: 100%; text-align: center; font-family: system-ui; font-size: 0.8rem;">
-    <a href="https://docs.google.com/document/d/1dg4HtPyEC_0yAq4SSrJXJCqM3YiqBHovSBuBVrouo4c/edit?usp=sharing" target="_blank" style="color: black; text-decoration: underline;">AI Disclosure</a>
-</div>
-
 </body>
 </html>
