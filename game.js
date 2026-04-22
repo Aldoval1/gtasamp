@@ -1712,13 +1712,18 @@ function handleAdminCommand(cmd) {
 }
 
 // --- Init ---
-initDB();
-updateUI();
-loadNextCard();
+document.addEventListener('DOMContentLoaded', () => {
+    initDB();
+    updateUI();
+    loadNextCard();
 
+    // Buttons
+    document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+    document.getElementById('btn-exit').addEventListener('click', () => window.location.href = 'index.html');
 
-// Buttons
-document.getElementById('btn-restart').addEventListener('click', () => location.reload());
-document.getElementById('btn-exit').addEventListener('click', () => window.location.href = 'index.html');
-document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());
-document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());
+    // Select all victory restart buttons (since there might be duplicates)
+    const victoryBtns = document.querySelectorAll('#btn-victory-restart');
+    victoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => location.reload());
+    });
+});
