@@ -324,24 +324,3 @@ body {
 .btn-circular:hover {
   transform: scale(1.1);
 }
-
-.gameover-layout {
-  justify-content: flex-end;
-  padding-bottom: 20%;
-}
-
-@media (max-width: 768px) {
-  .gameover-layout {
-    padding-bottom: 5%;
-  }
-}
-
-.gameover-buttons {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 30;
-  display: flex;
-  gap: 40px;
-}

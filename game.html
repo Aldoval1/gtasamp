@@ -103,8 +103,8 @@
 
     <!-- GameOver Overlay -->
     <div class="modal-oculto fullscreen-white" id="modal-gameover">
-        <div class="gameover-content gameover-layout">
-            <div class="gameover-buttons">
+        <div class="gameover-content" style="justify-content: flex-end; padding-bottom: 20%;">
+            <div style="display: flex; gap: 40px; margin-top: 60px;">
                 <div class="btn-circular" id="btn-restart">↻</div>
                 <div class="btn-circular" id="btn-exit">X</div>
             </div>
@@ -126,5 +126,10 @@
 
     <!-- Scripts -->
     <script src="game.js"></script>
+
+<div style="position: absolute; bottom: 10px; width: 100%; text-align: center; font-family: system-ui; font-size: 0.8rem; z-index: 100;">
+    <a href="https://docs.google.com/document/d/1dg4HtPyEC_0yAq4SSrJXJCqM3YiqBHovSBuBVrouo4c/edit?usp=sharing" target="_blank" style="color: black; text-decoration: underline;">AI Disclosure</a>
+</div>
+
 </body>
 </html>
