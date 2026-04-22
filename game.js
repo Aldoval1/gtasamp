@@ -1515,21 +1515,9 @@ function showResultModal(msg, callback) {
 
     document.getElementById('resultado-titulo').textContent = uiTexts[lang].result;
     document.getElementById('resultado-texto').textContent = msg;
-
-    // Translation Logic
-    const lang = localStorage.getItem('limboLang') || 'es';
-    const tituloEl = document.querySelector('#modal-resultado .titulo-settings');
-    const btn = document.getElementById('btn-continuar');
-
-    if (tituloEl) {
-        tituloEl.textContent = lang === 'en' ? 'Outcome' : 'Resultado';
-    }
-    if (btn) {
-        btn.textContent = lang === 'en' ? 'Continue' : 'Continuar';
-    }
-
     modal.classList.add('mostrar');
 
+    const btn = document.getElementById('btn-continuar');
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
 
