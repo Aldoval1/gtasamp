@@ -5,25 +5,17 @@ const uiTexts = {
         "year": "Year",
         "years": "Years",
         "survived": "You survived",
-        "retry": "Try Again",
-        "reasons": {
-            "health": "Your health deteriorated completely under the weight of the system.",
-            "economy": "You ran out of money and could no longer afford to survive.",
-            "hope": "The endless limbo broke your spirit and you lost all hope.",
-            "security": "You were discovered and detained by immigration authorities."
-        }
+        "in_system": "years in the system",
+        "result": "Result",
+        "retry": "Try Again"
     },
     "es": {
         "year": "Año",
         "years": "Años",
         "survived": "Sobreviviste",
-        "retry": "Intentar de Nuevo",
-        "reasons": {
-            "health": "Tu salud se deterioró completamente bajo el peso del sistema.",
-            "economy": "Te quedaste sin dinero y ya no pudiste costear tu supervivencia.",
-            "hope": "El limbo interminable rompió tu espíritu y perdiste la esperanza.",
-            "security": "Fuiste descubierto y detenido por las autoridades migratorias."
-        }
+        "in_system": "años en el sistema",
+        "result": "Resultado",
+        "retry": "Intentar de Nuevo"
     }
 };
 
@@ -1348,22 +1340,29 @@ function checkGameOver() {
     const currentYear = Math.floor(state.decisions / 3);
 
     let reason = null;
-    if (state.health <= 0) reason = uiTexts[lang].reasons.health;
-    else if (state.economy <= 0) reason = uiTexts[lang].reasons.economy;
-    else if (state.hope <= 0) reason = uiTexts[lang].reasons.hope;
-    else if (state.security <= 0) reason = uiTexts[lang].reasons.security;
+    if (state.health <= 0) reason = "health";
+    else if (state.economy <= 0) reason = "economy";
+    else if (state.hope <= 0) reason = "hope";
+    else if (state.security <= 0) reason = "security";
 
     if (reason) {
-        const yearText = currentYear === 1 ? uiTexts[lang].year : uiTexts[lang].years;
-        const goYearsEl = document.getElementById('go-years');
-        const goReasonEl = document.getElementById('go-reason');
-        const restartBtn = document.getElementById('btn-restart');
-
-        if (goYearsEl) goYearsEl.textContent = `${uiTexts[lang].survived} ${currentYear} ${yearText}`;
-        if (goReasonEl) goReasonEl.textContent = reason;
-        if (restartBtn) restartBtn.textContent = uiTexts[lang].retry;
-
         document.getElementById('modal-gameover').classList.add('mostrar');
+
+        // Hide card area
+        document.getElementById('card-area').style.display = 'none';
+
+        const counterEl = document.getElementById('years-counter');
+        const yearText = currentYear === 1 ? uiTexts[lang].year : uiTexts[lang].in_system;
+
+        // The user requested exactly: "solo diciendo que sobreviste x cantidad de anos en el sistema"
+        if (lang === 'en') {
+             counterEl.innerHTML = `${uiTexts[lang].survived}<br/>${currentYear}<br/>${uiTexts[lang].in_system}`;
+        } else {
+             counterEl.innerHTML = `${uiTexts[lang].survived}<br/>${currentYear}<br/>${uiTexts[lang].in_system}`;
+        }
+
+        counterEl.classList.add('center-screen');
+
     } else if (state.milestones.work && state.milestones.court && state.milestones.greencard && state.milestones.citizen) {
         document.getElementById('modal-victory').classList.add('mostrar');
     }
@@ -1511,7 +1510,10 @@ function handleSwipe(dir) {
 }
 
 function showResultModal(msg, callback) {
+    const lang = localStorage.getItem('limboLang') || 'es';
     const modal = document.getElementById('modal-resultado');
+
+    document.getElementById('resultado-titulo').textContent = uiTexts[lang].result;
     document.getElementById('resultado-texto').textContent = msg;
     modal.classList.add('mostrar');
 
@@ -1714,6 +1716,9 @@ initDB();
 updateUI();
 loadNextCard();
 
+
 // Buttons
 document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+document.getElementById('btn-exit').addEventListener('click', () => window.location.href = 'index.html');
+document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());
 document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());

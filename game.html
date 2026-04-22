@@ -95,7 +95,7 @@
     <!-- Outcome Overlay -->
     <div class="modal-oculto" id="modal-resultado">
         <div class="modal-contenido">
-            <h2 class="titulo-settings">Resultado</h2>
+            <h2 class="titulo-settings" id="resultado-titulo">Resultado</h2>
             <p id="resultado-texto" style="text-align:center; font-family: system-ui; font-size: 1.2rem; line-height: 1.4;"></p>
             <button class="selector-idioma btn-opcion" id="btn-continuar" style="margin-top: 20px;">Continuar</button>
         </div>
@@ -103,10 +103,11 @@
 
     <!-- GameOver Overlay -->
     <div class="modal-oculto fullscreen-white" id="modal-gameover">
-        <div class="gameover-content">
-            <h2 class="titulo-settings" id="go-years">Sobreviviste 0 Años</h2>
-            <p id="go-reason" style="text-align:center; font-family: system-ui; font-size: 1.5rem; margin-top: 10px;">Razón</p>
-            <button class="selector-idioma btn-opcion" id="btn-restart" style="margin-top: 40px;">Intentar de Nuevo</button>
+        <div class="gameover-content" style="justify-content: flex-end; padding-bottom: 20%;">
+            <div style="display: flex; gap: 40px; margin-top: 60px;">
+                <div class="btn-circular" id="btn-restart">↻</div>
+                <div class="btn-circular" id="btn-exit">X</div>
+            </div>
         </div>
     </div>
 
