@@ -362,6 +362,8 @@
         // Configurar cambio de idioma
                 selectorIdioma.addEventListener('change', (e) => {
             const idioma = e.target.value;
+            localStorage.setItem('limboLang', idioma);
+
             titleSettingsEl.textContent = textos[idioma].tituloSettings;
             labelMusicaEl.textContent = textos[idioma].labelMusica;
             labelIdiomaEl.textContent = textos[idioma].labelIdioma;
