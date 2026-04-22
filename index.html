@@ -202,7 +202,11 @@
             tut3Titulo: 'Your Pillars of Survival',
             tut3Texto: 'Keep your four resources balanced: Health, Economy, Hope, and Security. Be very careful with the high costs of the milestone cards; if any of these bars reaches zero, the system will defeat you and you will lose the game.',
             tut4Titulo: 'Time and Reality',
-            tut4Texto: 'Every 3 decisions equal 1 year of survival in the system. Every situation you will face is based on real research and academic testimonies.'
+            tut4Texto: 'Every 3 decisions equal 1 year of survival in the system. Every situation you will face is based on real research and academic testimonies.',
+            btnContinuar: 'Continue',
+            labelDificultad: 'Difficulty',
+            difNormal: 'Normal',
+            difEasy: 'Easy'
         },
         es: {
             tituloSettings: 'Ajustes',
@@ -219,7 +223,11 @@
             tut3Titulo: 'Tus Pilares de Supervivencia',
             tut3Texto: 'Mantén el equilibrio de tus cuatro recursos: Salud, Economía, Esperanza y Seguridad. Ten mucho cuidado con los altos costos de las cartas de hito; si cualquiera de estas barras llega a cero, el sistema te vencerá y perderás el juego.',
             tut4Titulo: 'El Tiempo y la Realidad',
-            tut4Texto: 'Cada 3 decisiones equivalen a 1 año de supervivencia en el sistema. Cada situación que enfrentarás está basada en investigaciones reales y testimonios académicos.'
+            tut4Texto: 'Cada 3 decisiones equivalen a 1 año de supervivencia en el sistema. Cada situación que enfrentarás está basada en investigaciones reales y testimonios académicos.',
+            btnContinuar: 'Continuar',
+            labelDificultad: 'Dificultad',
+            difNormal: 'Normal',
+            difEasy: 'Fácil'
         }
     };
 
@@ -390,7 +398,21 @@
             document.getElementById('tut3-texto').textContent = textos[idioma].tut3Texto;
 
             document.getElementById('tut4-titulo').textContent = textos[idioma].tut4Titulo;
-            document.getElementById('tut4-texto').textContent = textos[idioma].tut4Texto;
+                                    document.getElementById('tut4-texto').textContent = textos[idioma].tut4Texto;
+
+            // Update new settings and buttons
+            if (document.getElementById('label-dificultad')) {
+                document.getElementById('label-dificultad').textContent = textos[idioma].labelDificultad;
+            }
+            const difSelect = document.getElementById('selector-dificultad');
+            if (difSelect) {
+                difSelect.options[0].text = textos[idioma].difNormal;
+                difSelect.options[1].text = textos[idioma].difEasy;
+            }
+
+            // Check if game UI is loaded and update if necessary
+            // The game uses game.js for logic, but index.html acts as a shell. Wait, game.html?
+            // Ah, they are separate files.
         });
 
         // Intentar iniciar la música inmediatamente al cargar la página

@@ -1472,9 +1472,21 @@ function handleSwipe(dir) {
 function showResultModal(msg, callback) {
     const modal = document.getElementById('modal-resultado');
     document.getElementById('resultado-texto').textContent = msg;
+
+    // Translation Logic
+    const lang = localStorage.getItem('limboLang') || 'es';
+    const tituloEl = document.querySelector('#modal-resultado .titulo-settings');
+    const btn = document.getElementById('btn-continuar');
+
+    if (tituloEl) {
+        tituloEl.textContent = lang === 'en' ? 'Outcome' : 'Resultado';
+    }
+    if (btn) {
+        btn.textContent = lang === 'en' ? 'Continue' : 'Continuar';
+    }
+
     modal.classList.add('mostrar');
 
-    const btn = document.getElementById('btn-continuar');
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
 
@@ -1494,11 +1506,13 @@ async function loadNextCard() {
         initDB(); // Restart deck if empty
     }
 
-    // 25% chance to draw a milestone if unachieved ones exist
-    const unachieved = milestoneCards.filter(ms => !state.milestones[ms.milestone]);
+    // Order for milestones: work -> court -> greencard -> citizen
+    const milestoneOrder = ['work', 'court', 'greencard', 'citizen'];
+    const unachieved = milestoneOrder.map(msName => milestoneCards.find(card => card.milestone === msName)).filter(ms => ms && !state.milestones[ms.milestone]);
+
     if (unachieved.length > 0 && Math.random() < (localStorage.getItem('limboDificultad') === 'easy' ? 0.40 : 0.25)) {
-        // Pick a random unachieved milestone
-        currentCard = unachieved[Math.floor(Math.random() * unachieved.length)];
+        // Pick the first unachieved milestone in the chronological sequence
+        currentCard = unachieved[0];
     } else {
         currentCard = deck.pop();
     }
