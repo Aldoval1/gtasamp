@@ -6,10 +6,7 @@ body {
 }
 
 .game-container {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   width: 100vw;
   height: 100vh;
   z-index: 5;
@@ -101,10 +98,7 @@ body {
 
 /* Card Area */
 .card-area {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   flex-grow: 1;
   width: 100%;
   display: flex;
