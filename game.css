@@ -6,7 +6,10 @@ body {
 }
 
 .game-container {
-  position: relative;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100vw;
   height: 100vh;
   z-index: 5;
@@ -98,7 +101,10 @@ body {
 
 /* Card Area */
 .card-area {
-  position: relative;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   flex-grow: 1;
   width: 100%;
   display: flex;
@@ -324,19 +330,18 @@ body {
   padding-bottom: 20%;
 }
 
-.gameover-buttons {
-  position: relative;
-  z-index: 30;
-  display: flex;
-  gap: 40px;
-  margin-top: 60px;
-}
-
 @media (max-width: 768px) {
   .gameover-layout {
     padding-bottom: 5%;
   }
-  .gameover-buttons {
-    margin-top: 150px;
-  }
+}
+
+.gameover-buttons {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  gap: 40px;
 }
