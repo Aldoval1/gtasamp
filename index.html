@@ -48,13 +48,13 @@
 <option value="es">Español</option>
 </select>
 </div>
-<div class="opcion-grupo">
-<label id="label-dificultad">Difficulty</label>
-<select class="selector-idioma" id="selector-dificultad">
-<option value="normal">Normal</option>
-<option value="easy">Easy</option>
-</select>
+
+<div class="opcion-grupo" style="margin-top: 20px; text-align: center; border-top: 1px solid #000; padding-top: 10px;">
+    <a href="https://docs.google.com/document/d/1dg4HtPyEC_0yAq4SSrJXJCqM3YiqBHovSBuBVrouo4c/edit?usp=sharing" target="_blank" style="display: block; color: black; text-decoration: underline; margin-bottom: 8px; font-family: system-ui;">Research Paper</a>
+    <a href="#" target="_blank" style="display: block; color: black; text-decoration: underline; margin-bottom: 8px; font-family: system-ui;">Bibliografia</a>
+    <a href="#" target="_blank" style="display: block; color: black; text-decoration: underline; font-family: system-ui;">AI Disclosure</a>
 </div>
+
 </div>
 </div>
 </div>
@@ -92,10 +92,10 @@
     <div class="tutorial-visual">
         <div class="visual-timeline">
             <div class="visual-timeline-line"></div>
-            <div class="visual-timeline-point p1"><div class="visual-timeline-check">✓</div></div>
-            <div class="visual-timeline-point p2"><div class="visual-timeline-check">✓</div></div>
-            <div class="visual-timeline-point p3"><div class="visual-timeline-check">✓</div></div>
-            <div class="visual-timeline-point p4"><div class="visual-timeline-check">✓</div></div>
+            <div class="visual-timeline-point p1"><div class="visual-timeline-check"><svg viewBox="0 0 100 100" style="width:16px;height:16px;"><rect x="20" y="40" width="60" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="6"/><path d="M40 40 L40 25 L60 25 L60 40" fill="none" stroke="currentColor" stroke-width="6"/></svg></div></div>
+            <div class="visual-timeline-point p2"><div class="visual-timeline-check"><svg viewBox="0 0 100 100" style="width:16px;height:16px;"><path d="M50 20 L50 80 M20 40 L80 40 M30 40 L30 60 Q50 80 70 60 L70 40" fill="none" stroke="currentColor" stroke-width="6"/></svg></div></div>
+            <div class="visual-timeline-point p3"><div class="visual-timeline-check"><svg viewBox="0 0 100 100" style="width:16px;height:16px;"><rect x="20" y="30" width="60" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="35" cy="50" r="8" fill="currentColor"/><line x1="50" y1="45" x2="70" y2="45" stroke="currentColor" stroke-width="4"/><line x1="50" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="4"/></svg></div></div>
+            <div class="visual-timeline-point p4"><div class="visual-timeline-check"><svg viewBox="0 0 100 100" style="width:16px;height:16px;"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg></div></div>
         </div>
     </div>
 </div>
@@ -118,6 +118,7 @@
         </div>
     </div>
     <p id="tut4-texto" class="tutorial-texto"></p>
+    <button id="btn-comenzar-juego" class="boton-juego" style="margin-top: 20px; width: 80%; max-width: 200px; padding: 10px;">START</button>
 </div>
 </div>
 <div class="tutorial-navegacion" id="tutorial-nav">
@@ -198,15 +199,12 @@
             tut1Texto1: 'Your goal is to try to escape the legal limbo of many immigrants by making decisions according to the situation you are facing at the moment.',
             tut1Texto2: 'Make decisions by swiping the center card left or right. Before releasing it, watch the arrows (▲ or ▼) at the top to predict the consequences of your action.',
             tut2Titulo: 'Controls and Strategic Decision',
-            tut2Texto1: 'To win you must collect 4 Milestones (Work Permit), (Court Resolution) (Green Card) (Citizenship) (cards that will appear randomly). Accepting them has a significant cost, so you will not always be able to afford it with your current situation, so you have to consider and take risks.',
+            tut2Texto1: 'To win you must collect 4 Milestones (Work Permit <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><rect x="20" y="40" width="60" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="6"/><path d="M40 40 L40 25 L60 25 L60 40" fill="none" stroke="currentColor" stroke-width="6"/></svg>), (Court Resolution <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><path d="M50 20 L50 80 M20 40 L80 40 M30 40 L30 60 Q50 80 70 60 L70 40" fill="none" stroke="currentColor" stroke-width="6"/></svg>) (Green Card <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><rect x="20" y="30" width="60" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="35" cy="50" r="8" fill="currentColor"/><line x1="50" y1="45" x2="70" y2="45" stroke="currentColor" stroke-width="4"/><line x1="50" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="4"/></svg>) (Citizenship <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>) (cards that will appear randomly). Accepting them has a significant cost, so you will not always be able to afford it with your current situation, so you have to consider and take risks.',
             tut3Titulo: 'Your Pillars of Survival',
             tut3Texto: 'Keep your four resources balanced: Health, Economy, Hope, and Security. Be very careful with the high costs of the milestone cards; if any of these bars reaches zero, the system will defeat you and you will lose the game.',
             tut4Titulo: 'Time and Reality',
             tut4Texto: 'Every 3 decisions equal 1 year of survival in the system. Every situation you will face is based on real research and academic testimonies.',
-            btnContinuar: 'Continue',
-            labelDificultad: 'Difficulty',
-            difNormal: 'Normal',
-            difEasy: 'Easy'
+            btnComenzar: 'START'
         },
         es: {
             tituloSettings: 'Ajustes',
@@ -219,15 +217,12 @@
             tut1Texto1: 'Tu objetivo es tratar de escapar el limbo legal de muchos inmigrantes al tomar decisiones acorde a la situacion que estes afrontando en este momento.',
             tut1Texto2: 'Toma decisiones deslizando la tarjeta central hacia la izquierda o la derecha. Antes de soltarla, observa las flechas (▲ o ▼) en la parte superior para predecir las consecuencias de tu acción.',
             tut2Titulo: 'Los Controles y la Decisión Estratégica',
-            tut2Texto1: 'Para ganar deberas de recolectar 4 Milestones (Permiso de Trabajo), (Resolucion de corte) (GreenCard) (Ciudadania) (cards que apareceran de manera aleatoria. El aceptarlas tiene un costo sigificativo, por lo que no siempre podras permitirtelo con tu situacion actual, por lo que tienes que considerar y tomar riesgos.',
+            tut2Texto1: 'Para ganar deberas de recolectar 4 Milestones (Permiso de Trabajo <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><rect x="20" y="40" width="60" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="6"/><path d="M40 40 L40 25 L60 25 L60 40" fill="none" stroke="currentColor" stroke-width="6"/></svg>), (Resolucion de corte <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><path d="M50 20 L50 80 M20 40 L80 40 M30 40 L30 60 Q50 80 70 60 L70 40" fill="none" stroke="currentColor" stroke-width="6"/></svg>) (GreenCard <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><rect x="20" y="30" width="60" height="40" rx="5" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="35" cy="50" r="8" fill="currentColor"/><line x1="50" y1="45" x2="70" y2="45" stroke="currentColor" stroke-width="4"/><line x1="50" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="4"/></svg>) (Ciudadania <svg viewBox="0 0 100 100" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>) (cards que apareceran de manera aleatoria). El aceptarlas tiene un costo sigificativo, por lo que no siempre podras permitirtelo con tu situacion actual, por lo que tienes que considerar y tomar riesgos.',
             tut3Titulo: 'Tus Pilares de Supervivencia',
             tut3Texto: 'Mantén el equilibrio de tus cuatro recursos: Salud, Economía, Esperanza y Seguridad. Ten mucho cuidado con los altos costos de las cartas de hito; si cualquiera de estas barras llega a cero, el sistema te vencerá y perderás el juego.',
             tut4Titulo: 'El Tiempo y la Realidad',
             tut4Texto: 'Cada 3 decisiones equivalen a 1 año de supervivencia en el sistema. Cada situación que enfrentarás está basada en investigaciones reales y testimonios académicos.',
-            btnContinuar: 'Continuar',
-            labelDificultad: 'Dificultad',
-            difNormal: 'Normal',
-            difEasy: 'Fácil'
+        btnComenzar: 'COMENZAR'
         }
     };
 
@@ -325,6 +320,14 @@
             window.location.href = 'game.html';
         });
 
+        const btnComenzarJuego = document.getElementById('btn-comenzar-juego');
+        if (btnComenzarJuego) {
+            btnComenzarJuego.addEventListener('click', () => {
+                playClickSound();
+                window.location.href = 'game.html';
+            });
+        }
+
         btnTutorialSiEl.addEventListener('click', () => {
             playClickSound();
             // Expandir modal al centro
@@ -392,27 +395,16 @@
             document.getElementById('tut1-texto2').textContent = textos[idioma].tut1Texto2;
 
             document.getElementById('tut2-titulo').textContent = textos[idioma].tut2Titulo;
-            document.getElementById('tut2-texto1').textContent = textos[idioma].tut2Texto1;
+            document.getElementById('tut2-texto1').innerHTML = textos[idioma].tut2Texto1;
 
             document.getElementById('tut3-titulo').textContent = textos[idioma].tut3Titulo;
             document.getElementById('tut3-texto').textContent = textos[idioma].tut3Texto;
 
             document.getElementById('tut4-titulo').textContent = textos[idioma].tut4Titulo;
-                                    document.getElementById('tut4-texto').textContent = textos[idioma].tut4Texto;
-
-            // Update new settings and buttons
-            if (document.getElementById('label-dificultad')) {
-                document.getElementById('label-dificultad').textContent = textos[idioma].labelDificultad;
+            document.getElementById('tut4-texto').textContent = textos[idioma].tut4Texto;
+            if (document.getElementById('btn-comenzar-juego')) {
+                document.getElementById('btn-comenzar-juego').textContent = textos[idioma].btnComenzar;
             }
-            const difSelect = document.getElementById('selector-dificultad');
-            if (difSelect) {
-                difSelect.options[0].text = textos[idioma].difNormal;
-                difSelect.options[1].text = textos[idioma].difEasy;
-            }
-
-            // Check if game UI is loaded and update if necessary
-            // The game uses game.js for logic, but index.html acts as a shell. Wait, game.html?
-            // Ah, they are separate files.
         });
 
         // Intentar iniciar la música inmediatamente al cargar la página
@@ -431,50 +423,6 @@
                 musicaIniciada = true;
             }
         });
-
-        // --- Modal Bibliografía ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnBibliography = document.getElementById('link-bibliography');
-            const contBibliography = document.getElementById('contenedor-bibliography');
-            const cerrarBibliography = document.getElementById('cerrar-bibliography');
-
-            btnBibliography.addEventListener('click', (e) => {
-                e.preventDefault();
-                contBibliography.classList.add('mostrar');
-                document.getElementById('footer-links').style.display = 'none';
-            });
-
-            cerrarBibliography.addEventListener('click', () => {
-                contBibliography.classList.remove('mostrar');
-                document.getElementById('footer-links').style.display = 'flex';
-            });
-        });
 </script>
-
-    <!-- Bibliography Modal -->
-    <div id="contenedor-bibliography" class="contenedor ocultar-suave" style="z-index: 50; background: white;">
-        <h2 id="text-bibliography-title" class="tutorial-titulo">Bibliography</h2>
-        <div class="tutorial-paginas-contenedor mostrar" style="bottom: 80px;">
-            <div class="pagina-tutorial activa" style="pointer-events: auto; justify-content: flex-start;">
-                <ul class="tutorial-texto" style="font-size: 1rem; margin-bottom: 20px; list-style-type: none; padding-left: 0;">
-                    <li style="margin-bottom: 15px;">American Immigration Council. <i>Beyond a Border Solution: How to Build a Humanitarian Protection System That Won't Break</i>. May 2023. <a href="https://www.americanimmigrationcouncil.org/wp-content/uploads/2025/01/02.23_border_white_paper_v6.pdf" target="_blank">www.americanimmigrationcouncil.org/wp-content/uploads/2025/01/02.23_border_white_paper_v6.pdf</a>. Accessed 15 Mar. 2026.</li>
-                    <li style="margin-bottom: 15px;">Frolich, Megan, and Bethany Bruner. "Undocumented Victims of Violent Crimes Denied U Visa Help by Local Police." <i>The Columbus Dispatch</i>, 23 Aug. 2021. <a href="https://www.google.com/search?q=www.dispatch.com/story/news/crime/2021/08/23/undocumented-violent-crime-victims-assist-police-denied-u-visa-help/5551324001/" target="_blank">https://www.google.com/search?q=www.dispatch.com/story/news/crime/2021/08/23/undocumented-violent-crime-victims-assist-police-denied-u-visa-help/5551324001/</a>. Accessed 15 Mar. 2026.</li>
-                    <li style="margin-bottom: 15px;">Jiang, Ai. "Give Me English." <i>Fantasy & Science Fiction</i>, vol. 142, no. 5 & 6, May/June 2022, pp. 37-48.</li>
-                    <li style="margin-bottom: 15px;">Mahajan, Pooja. "Living the American Dream." <i>YouTube</i>, uploaded by TEDx Talks, 20 May 2016. <a href="https://www.youtube.com/watch?v=M5hN5xSeC7M" target="_blank">www.youtube.com/watch?v=M5hN5xSeC7M</a>. Accessed 15 Mar. 2026.</li>
-                    <li style="margin-bottom: 15px;">Moreno, O., et al. "The Intersection of Immigration-Related Racism and Xenophobia Shaping Undocumented Immigrants’ Experiences With Liminality." <i>Qualitative Psychology</i>, vol. 12, no. 2, 2025, pp. 186-199.</li>
-                    <li style="margin-bottom: 15px;">Nagel, Caroline. "Immigration Policy in the Second Trump Administration: Restriction, Removal, and the Limits of MAGA Nativism." <i>The Geographical Journal</i>, vol. 191, no. 4, 2025. <a href="https://doi.org/10.1111/geoj.70015" target="_blank">https://doi.org/10.1111/geoj.70015</a>. Accessed 15 Mar. 2026.</li>
-                    <li style="margin-bottom: 15px;">Rodriguez, Ana. Personal Interview. 27 Feb. 2026.</li>
-                </ul>
-            </div>
-        </div>
-        <img id="cerrar-bibliography" src="cancel.png" alt="Cerrar" class="boton-cerrar">
-    </div>
-
-
-    <div id="footer-links" class="footer-links">
-        <a href="#" id="link-bibliography">Bibliography</a>
-        <a href="#" id="link-ai-disclosure">AI Disclosure</a>
-        <a href="#" id="link-research-paper">Research Paper</a>
-    </div>
 </body>
 </html>

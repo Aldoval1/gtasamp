@@ -623,6 +623,9 @@ input[type=range]::-webkit-slider-thumb {
     height: 40px;
     display: flex;
     align-items: center;
+    transform: scale(1.5);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .visual-timeline-line {
     position: absolute;
@@ -802,114 +805,3 @@ input[type=range]::-webkit-slider-thumb {
 
 @keyframes clockMinAnim { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @keyframes clockHourAnim { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-/* --- Footer Links --- */
-.footer-links {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-
-    opacity: 0;
-    animation: aparecerTitulo 3s ease-in-out 2s forwards;
-}
-
-.footer-links a {
-    font-family: system-ui, sans-serif;
-    color: #000;
-    text-decoration: underline;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.footer-links a:hover {
-    transform: scale(1.05);
-    opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-    .footer-links {
-        bottom: 10px;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-    .footer-links a {
-        font-size: 0.85rem;
-    }
-}
-
-/* --- Bibliography Overlay --- */
-#contenedor-bibliography {
-    background: white;
-    z-index: 30; /* Above tutorial, below console */
-}
-
-#contenedor-bibliography a {
-    color: #000;
-    text-decoration: underline;
-    transition: opacity 0.2s ease;
-}
-
-#contenedor-bibliography a:hover {
-    opacity: 0.7;
-}
-
-#contenedor-bibliography .tutorial-texto li {
-    line-height: 1.6;
-}
-
-#contenedor-bibliography.mostrar {
-    display: flex !important;
-    opacity: 1;
-    pointer-events: auto;
-}
-#contenedor-bibliography {
-    display: none;
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#contenedor-bibliography .tutorial-titulo {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-}
-
-#contenedor-bibliography .boton-cerrar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-#contenedor-bibliography .tutorial-paginas-contenedor {
-    position: absolute;
-    top: 100px;
-    bottom: 20px;
-    left: 0;
-    width: 100%;
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
-}
-
-#contenedor-bibliography .pagina-tutorial {
-    position: relative;
-    width: 80%;
-    max-width: 800px;
-    height: auto;
-}

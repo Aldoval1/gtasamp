@@ -1,4 +1,24 @@
 
+
+const uiTexts = {
+    "en": {
+        "year": "Year",
+        "years": "Years",
+        "survived": "You survived",
+        "in_system": "years in the system",
+        "result": "Result",
+        "retry": "Try Again"
+    },
+    "es": {
+        "year": "Año",
+        "years": "Años",
+        "survived": "Sobreviviste",
+        "in_system": "años en el sistema",
+        "result": "Resultado",
+        "retry": "Intentar de Nuevo"
+    }
+};
+
 let userApiKey = null;
 
 // --- Global State ---
@@ -8,6 +28,7 @@ let state = {
     hope: 50,
     security: 50,
     milestones: { work: false, court: false, greencard: false, citizen: false },
+    decisions: 0,
     aiEnabled: false
 };
 
@@ -30,9 +51,9 @@ const defaultCards = [
                 "en": "Pay a translator"
             },
             "effect": {
-                "economy": -20,
+                "economy": -12,
                 "security": 15,
-                "health": -10,
+                "health": -6,
                 "hope": 10
             },
             "msg": {
@@ -47,9 +68,9 @@ const defaultCards = [
             },
             "effect": {
                 "economy": 15,
-                "security": -20,
+                "security": -12,
                 "health": 10,
-                "hope": -15
+                "hope": -9
             },
             "msg": {
                 "es": "Vives con el miedo constante de haber cometido un error que detone tu deportaci\u00f3n.",
@@ -74,8 +95,8 @@ const defaultCards = [
                 "en": "Beg for sponsorship"
             },
             "effect": {
-                "hope": -15,
-                "health": -10,
+                "hope": -9,
+                "health": -6,
                 "security": 10,
                 "economy": 10
             },
@@ -92,8 +113,8 @@ const defaultCards = [
             "effect": {
                 "hope": 20,
                 "economy": 15,
-                "security": -25,
-                "health": -15
+                "security": -15,
+                "health": -9
             },
             "msg": {
                 "es": "Vives aterrorizado de que una auditor\u00eda federal descubra la discrepancia y te arreste.",
@@ -119,8 +140,8 @@ const defaultCards = [
             },
             "effect": {
                 "hope": 15,
-                "security": -25,
-                "economy": -10,
+                "security": -15,
+                "economy": -6,
                 "health": 10
             },
             "msg": {
@@ -136,8 +157,8 @@ const defaultCards = [
             "effect": {
                 "security": 20,
                 "economy": 10,
-                "health": -20,
-                "hope": -15
+                "health": -12,
+                "hope": -9
             },
             "msg": {
                 "es": "La culpa y el miedo a la criminalidad impune en tu zona destruyen tu paz mental.",
@@ -163,9 +184,9 @@ const defaultCards = [
             },
             "effect": {
                 "health": 25,
-                "economy": -30,
+                "economy": -18,
                 "hope": 10,
-                "security": -10
+                "security": -6
             },
             "msg": {
                 "es": "Adquieres una deuda aplastante que mancha tu historial crediticio en el pa\u00eds.",
@@ -180,8 +201,8 @@ const defaultCards = [
             "effect": {
                 "economy": 20,
                 "security": 10,
-                "health": -30,
-                "hope": -15
+                "health": -18,
+                "hope": -9
             },
             "msg": {
                 "es": "El da\u00f1o f\u00edsico empeora y sientes que tu cuerpo es desechable para esta sociedad.",
@@ -207,8 +228,8 @@ const defaultCards = [
             },
             "effect": {
                 "hope": 15,
-                "security": -20,
-                "health": -10,
+                "security": -12,
+                "health": -6,
                 "economy": 10
             },
             "msg": {
@@ -224,8 +245,8 @@ const defaultCards = [
             "effect": {
                 "security": 20,
                 "health": 10,
-                "economy": -20,
-                "hope": -15
+                "economy": -12,
+                "hope": -9
             },
             "msg": {
                 "es": "Pierdes tu turno de trabajo del d\u00eda y la paranoia de ser perseguido no te deja dormir.",
@@ -252,8 +273,8 @@ const defaultCards = [
             "effect": {
                 "health": 20,
                 "security": 10,
-                "hope": -15,
-                "economy": -10
+                "hope": -9,
+                "economy": -6
             },
             "msg": {
                 "es": "Tu ignorancia voluntaria te hace perder fechas l\u00edmite importantes para proteger tu caso legal.",
@@ -267,8 +288,8 @@ const defaultCards = [
             },
             "effect": {
                 "hope": 20,
-                "security": -15,
-                "health": -10,
+                "security": -9,
+                "health": -6,
                 "economy": 10
             },
             "msg": {
@@ -296,8 +317,8 @@ const defaultCards = [
             "effect": {
                 "economy": 15,
                 "hope": 10,
-                "security": -25,
-                "health": -15
+                "security": -15,
+                "health": -9
             },
             "msg": {
                 "es": "El jefe amenaza con llamar a ICE en represalia, poni\u00e9ndote en alerta m\u00e1xima.",
@@ -312,8 +333,8 @@ const defaultCards = [
             "effect": {
                 "security": 20,
                 "health": 10,
-                "economy": -25,
-                "hope": -15
+                "economy": -15,
+                "hope": -9
             },
             "msg": {
                 "es": "El golpe financiero te deja sin poder pagar la renta y te sientes deshumanizado.",
@@ -338,9 +359,9 @@ const defaultCards = [
                 "en": "Pay and trust"
             },
             "effect": {
-                "economy": -30,
+                "economy": -18,
                 "hope": 25,
-                "security": -15,
+                "security": -9,
                 "health": 10
             },
             "msg": {
@@ -356,8 +377,8 @@ const defaultCards = [
             "effect": {
                 "economy": 25,
                 "security": 15,
-                "hope": -20,
-                "health": -10
+                "hope": -12,
+                "health": -6
             },
             "msg": {
                 "es": "La desesperaci\u00f3n del limbo interminable sigue consumiendo tu mente d\u00eda a d\u00eda.",
@@ -382,10 +403,10 @@ const defaultCards = [
                 "en": "Pay taxes"
             },
             "effect": {
-                "economy": -25,
+                "economy": -15,
                 "security": 20,
                 "hope": 10,
-                "health": -10
+                "health": -6
             },
             "msg": {
                 "es": "Te quedas sin dinero para alimentos b\u00e1sicos, financiando un sistema que te excluye.",
@@ -400,8 +421,8 @@ const defaultCards = [
             "effect": {
                 "economy": 25,
                 "health": 10,
-                "security": -20,
-                "hope": -15
+                "security": -12,
+                "hope": -9
             },
             "msg": {
                 "es": "Vives con el terror constante de que una auditor\u00eda del IRS descubra la evasi\u00f3n y destruya tu caso.",
@@ -426,10 +447,10 @@ const defaultCards = [
                 "en": "Send savings"
             },
             "effect": {
-                "economy": -25,
+                "economy": -15,
                 "health": 20,
                 "hope": 10,
-                "security": -15
+                "security": -9
             },
             "msg": {
                 "es": "Te quedas sin los fondos requeridos para renovar tus propios tr\u00e1mites migratorios a tiempo.",
@@ -444,8 +465,8 @@ const defaultCards = [
             "effect": {
                 "economy": 20,
                 "security": 15,
-                "health": -25,
-                "hope": -15
+                "health": -15,
+                "hope": -9
             },
             "msg": {
                 "es": "La culpa y la desconexi\u00f3n forzada con tus ra\u00edces fracturan tu bienestar emocional.",
@@ -472,8 +493,8 @@ const defaultCards = [
             "effect": {
                 "security": 25,
                 "health": 10,
-                "economy": -25,
-                "hope": -10
+                "economy": -15,
+                "hope": -6
             },
             "msg": {
                 "es": "Pierdes tu \u00fanica fuente de ingresos por despido y tus finanzas colapsan r\u00e1pidamente.",
@@ -488,8 +509,8 @@ const defaultCards = [
             "effect": {
                 "economy": 20,
                 "hope": 10,
-                "security": -25,
-                "health": -15
+                "security": -15,
+                "health": -9
             },
             "msg": {
                 "es": "El p\u00e1nico de ver cada veh\u00edculo oficial en la calle te provoca taquicardia severa.",
@@ -514,9 +535,9 @@ const defaultCards = [
                 "en": "Pay tuition"
             },
             "effect": {
-                "economy": -30,
+                "economy": -18,
                 "hope": 25,
-                "health": -10,
+                "health": -6,
                 "security": 10
             },
             "msg": {
@@ -532,8 +553,8 @@ const defaultCards = [
             "effect": {
                 "economy": 20,
                 "health": 15,
-                "hope": -25,
-                "security": -10
+                "hope": -15,
+                "security": -6
             },
             "msg": {
                 "es": "Ves c\u00f3mo tu potencial intelectual se estanca ante el muro burocr\u00e1tico del sistema.",
@@ -560,8 +581,8 @@ const defaultCards = [
             "effect": {
                 "health": 20,
                 "economy": 15,
-                "security": -20,
-                "hope": -10
+                "security": -12,
+                "hope": -6
             },
             "msg": {
                 "es": "Tu estatus legal queda fr\u00e1gil y congelado en el tiempo sin garant\u00edas de resoluci\u00f3n.",
@@ -576,8 +597,8 @@ const defaultCards = [
             "effect": {
                 "hope": 15,
                 "security": 10,
-                "health": -20,
-                "economy": -15
+                "health": -12,
+                "economy": -9
             },
             "msg": {
                 "es": "Gastas energ\u00eda mental y dinero vital en intentar mover una burocracia inamovible.",
@@ -602,10 +623,10 @@ const defaultCards = [
                 "en": "Accept rent hike"
             },
             "effect": {
-                "economy": -25,
+                "economy": -15,
                 "security": 20,
                 "health": 10,
-                "hope": -15
+                "hope": -9
             },
             "msg": {
                 "es": "Cedes a la extorsi\u00f3n sistem\u00e1tica que normaliza el abuso contra los indocumentados.",
@@ -620,8 +641,8 @@ const defaultCards = [
             "effect": {
                 "hope": 20,
                 "economy": 10,
-                "security": -25,
-                "health": -15
+                "security": -15,
+                "health": -9
             },
             "msg": {
                 "es": "La b\u00fasqueda desesperada de vivienda sin papeles te expone y te agota f\u00edsicamente.",
@@ -648,8 +669,8 @@ const defaultCards = [
             "effect": {
                 "economy": 25,
                 "hope": 10,
-                "security": -30,
-                "health": -15
+                "security": -18,
+                "health": -9
             },
             "msg": {
                 "es": "El trayecto diario se convierte en una tortura psicol\u00f3gica por miedo a la deportaci\u00f3n.",
@@ -664,8 +685,8 @@ const defaultCards = [
             "effect": {
                 "security": 25,
                 "health": 15,
-                "economy": -30,
-                "hope": -10
+                "economy": -18,
+                "hope": -6
             },
             "msg": {
                 "es": "El costo del transporte se lleva casi toda tu ganancia de la semana.",
@@ -692,8 +713,8 @@ const defaultCards = [
             "effect": {
                 "economy": 15,
                 "security": 10,
-                "health": -30,
-                "hope": -15
+                "health": -18,
+                "hope": -9
             },
             "msg": {
                 "es": "Tu cuerpo colapsa progresivamente y el aislamiento deteriora tu voluntad de seguir.",
@@ -708,8 +729,8 @@ const defaultCards = [
             "effect": {
                 "health": 20,
                 "hope": 15,
-                "security": -20,
-                "economy": -10
+                "security": -12,
+                "economy": -6
             },
             "msg": {
                 "es": "Entregas tus datos personales a un sistema que podr\u00eda ser auditado por el gobierno federal.",
@@ -736,8 +757,8 @@ const defaultCards = [
             "effect": {
                 "hope": 15,
                 "health": 10,
-                "security": -20,
-                "economy": -10
+                "security": -12,
+                "economy": -6
             },
             "msg": {
                 "es": "La paranoia de haber registrado tu direcci\u00f3n ante un agente estatal te quita el sue\u00f1o.",
@@ -752,8 +773,8 @@ const defaultCards = [
             "effect": {
                 "security": 20,
                 "economy": 10,
-                "hope": -15,
-                "health": -10
+                "hope": -9,
+                "health": -6
             },
             "msg": {
                 "es": "La sensaci\u00f3n de ser un fantasma sin representaci\u00f3n en el pa\u00eds alimenta tu depresi\u00f3n.",
@@ -780,8 +801,8 @@ const defaultCards = [
             "effect": {
                 "hope": 20,
                 "health": 10,
-                "security": -25,
-                "economy": -15
+                "security": -15,
+                "economy": -9
             },
             "msg": {
                 "es": "El empleado llama a seguridad alegando un disturbio y te arriesgas a una revisi\u00f3n de antecedentes.",
@@ -796,8 +817,8 @@ const defaultCards = [
             "effect": {
                 "security": 20,
                 "economy": 10,
-                "hope": -25,
-                "health": -15
+                "hope": -15,
+                "health": -9
             },
             "msg": {
                 "es": "El peso de la humillaci\u00f3n fractura tu sentido de identidad y aplasta tu autoestima.",
@@ -824,8 +845,8 @@ const defaultCards = [
             "effect": {
                 "security": 20,
                 "hope": 10,
-                "health": -20,
-                "economy": -15
+                "health": -12,
+                "economy": -9
             },
             "msg": {
                 "es": "La relaci\u00f3n se vuelve muy hostil y te cobra recargos por el tiempo extra.",
@@ -840,8 +861,8 @@ const defaultCards = [
             "effect": {
                 "health": 15,
                 "economy": 15,
-                "security": -25,
-                "hope": -15
+                "security": -15,
+                "hope": -9
             },
             "msg": {
                 "es": "El error t\u00e9cnico no revisado podr\u00eda causar la denegaci\u00f3n definitiva de tu asilo.",
@@ -866,8 +887,8 @@ const defaultCards = [
                 "en": "Accept deal"
             },
             "effect": {
-                "economy": -30,
-                "security": -20,
+                "economy": -18,
+                "security": -12,
                 "hope": 25,
                 "health": 10
             },
@@ -884,8 +905,8 @@ const defaultCards = [
             "effect": {
                 "security": 25,
                 "economy": 20,
-                "hope": -30,
-                "health": -10
+                "hope": -18,
+                "health": -6
             },
             "msg": {
                 "es": "Desechar una salida r\u00e1pida te obliga a enfrentar la brutal realidad de tu limbo indefinido.",
@@ -910,8 +931,8 @@ const defaultCards = [
                 "en": "Take them in"
             },
             "effect": {
-                "economy": -20,
-                "security": -15,
+                "economy": -12,
+                "security": -9,
                 "hope": 25,
                 "health": 10
             },
@@ -928,8 +949,8 @@ const defaultCards = [
             "effect": {
                 "economy": 20,
                 "security": 15,
-                "hope": -25,
-                "health": -15
+                "hope": -15,
+                "health": -9
             },
             "msg": {
                 "es": "El ego\u00edsmo impuesto por la supervivencia destruye tu empat\u00eda y te a\u00edsla de tu comunidad.",
@@ -954,8 +975,8 @@ const defaultCards = [
                 "en": "Move blindly"
             },
             "effect": {
-                "economy": -30,
-                "security": -15,
+                "economy": -18,
+                "security": -9,
                 "hope": 25,
                 "health": 10
             },
@@ -972,8 +993,8 @@ const defaultCards = [
             "effect": {
                 "economy": 20,
                 "security": 15,
-                "hope": -25,
-                "health": -10
+                "hope": -15,
+                "health": -6
             },
             "msg": {
                 "es": "Sigues soportando el abuso sistem\u00e1tico y la asfixia de un gobierno estatal que te rechaza.",
@@ -998,8 +1019,8 @@ const defaultCards = [
                 "en": "Private psychologist"
             },
             "effect": {
-                "economy": -25,
-                "security": -10,
+                "economy": -15,
+                "security": -6,
                 "health": 25,
                 "hope": 15
             },
@@ -1016,8 +1037,8 @@ const defaultCards = [
             "effect": {
                 "economy": 20,
                 "security": 15,
-                "health": -30,
-                "hope": -15
+                "health": -18,
+                "hope": -9
             },
             "msg": {
                 "es": "Tu salud mental empeora dr\u00e1sticamente, acerc\u00e1ndote a un punto de quiebre incapacitante.",
@@ -1044,8 +1065,8 @@ const defaultCards = [
             "effect": {
                 "hope": 20,
                 "health": 10,
-                "security": -25,
-                "economy": -15
+                "security": -15,
+                "economy": -9
             },
             "msg": {
                 "es": "Te expones ante c\u00e1maras gubernamentales y pierdes los ingresos del d\u00eda laboral.",
@@ -1060,8 +1081,8 @@ const defaultCards = [
             "effect": {
                 "security": 20,
                 "economy": 15,
-                "hope": -25,
-                "health": -10
+                "hope": -15,
+                "health": -6
             },
             "msg": {
                 "es": "La impotencia de no poder defender tu propio futuro destruye tu sentido de voluntad.",
@@ -1086,9 +1107,9 @@ const defaultCards = [
                 "en": "Pay again"
             },
             "effect": {
-                "economy": -25,
+                "economy": -15,
                 "security": 15,
-                "health": -15,
+                "health": -9,
                 "hope": 10
             },
             "msg": {
@@ -1102,8 +1123,8 @@ const defaultCards = [
                 "en": "Appeal error"
             },
             "effect": {
-                "economy": -15,
-                "security": -15,
+                "economy": -9,
+                "security": -9,
                 "hope": 20,
                 "health": 10
             },
@@ -1134,8 +1155,8 @@ const milestoneCards = [
                 "en": "Pay process"
             },
             "effect": {
-                "economy": -40,
-                "hope": -10
+                "economy": -24,
+                "hope": -6
             },
             "msg": {
                 "es": "Logras enviar los papeles. El permiso est\u00e1 en camino.",
@@ -1172,8 +1193,8 @@ const milestoneCards = [
                 "en": "Go to court prepared"
             },
             "effect": {
-                "economy": -30,
-                "health": -30
+                "economy": -18,
+                "health": -18
             },
             "msg": {
                 "es": "El juez falla a tu favor. Tienes protecci\u00f3n oficial.",
@@ -1210,9 +1231,9 @@ const milestoneCards = [
                 "en": "Apply for residency"
             },
             "effect": {
-                "economy": -40,
-                "security": -20,
-                "health": -20
+                "economy": -24,
+                "security": -12,
+                "health": -12
             },
             "msg": {
                 "es": "Pasas la entrevista. Eres residente permanente.",
@@ -1249,10 +1270,10 @@ const milestoneCards = [
                 "en": "Take the oath"
             },
             "effect": {
-                "economy": -50,
-                "health": -20,
-                "hope": -10,
-                "security": -10
+                "economy": -30,
+                "health": -12,
+                "hope": -6,
+                "security": -6
             },
             "msg": {
                 "es": "Lo lograste. Eres ciudadano.",
@@ -1293,29 +1314,21 @@ function updateUI() {
     if (state.milestones.greencard) document.getElementById('ms-greencard').classList.add('achieved');
     if (state.milestones.citizen) document.getElementById('ms-citizen').classList.add('achieved');
 
+    const lang = localStorage.getItem('limboLang') || 'es';
+    const currentYear = Math.floor(state.decisions / 3);
+    const counterEl = document.getElementById('years-counter');
+    if (counterEl) {
+        counterEl.textContent = `${uiTexts[lang].year} ${currentYear}`;
+    }
+
     checkGameOver();
 }
 
 function applyEffect(effect, isMilestone = null) {
-    let diff = localStorage.getItem('limboDificultad') || 'normal';
-    let multiplier = diff === 'easy' ? 0.5 : 1;
-
-    // Calculate modified effects without mutating the original object
-    let healthChange = effect.health || 0;
-    let economyChange = effect.economy || 0;
-    let hopeChange = effect.hope || 0;
-    let securityChange = effect.security || 0;
-
-    if (healthChange < 0) healthChange = Math.round(healthChange * multiplier);
-    if (economyChange < 0) economyChange = Math.round(economyChange * multiplier);
-    if (hopeChange < 0) hopeChange = Math.round(hopeChange * multiplier);
-    if (securityChange < 0) securityChange = Math.round(securityChange * multiplier);
-
-    if (healthChange) state.health = Math.max(0, Math.min(100, state.health + healthChange));
-    if (economyChange) state.economy = Math.max(0, Math.min(100, state.economy + economyChange));
-    if (hopeChange) state.hope = Math.max(0, Math.min(100, state.hope + hopeChange));
-    if (securityChange) state.security = Math.max(0, Math.min(100, state.security + securityChange));
-
+    if (effect.health) state.health = Math.max(0, Math.min(100, state.health + effect.health));
+    if (effect.economy) state.economy = Math.max(0, Math.min(100, state.economy + effect.economy));
+    if (effect.hope) state.hope = Math.max(0, Math.min(100, state.hope + effect.hope));
+    if (effect.security) state.security = Math.max(0, Math.min(100, state.security + effect.security));
     if (isMilestone) {
         state.milestones[isMilestone] = true;
     }
@@ -1323,8 +1336,33 @@ function applyEffect(effect, isMilestone = null) {
 }
 
 function checkGameOver() {
-    if (state.health <= 0 || state.economy <= 0 || state.hope <= 0 || state.security <= 0) {
+    const lang = localStorage.getItem('limboLang') || 'es';
+    const currentYear = Math.floor(state.decisions / 3);
+
+    let reason = null;
+    if (state.health <= 0) reason = "health";
+    else if (state.economy <= 0) reason = "economy";
+    else if (state.hope <= 0) reason = "hope";
+    else if (state.security <= 0) reason = "security";
+
+    if (reason) {
         document.getElementById('modal-gameover').classList.add('mostrar');
+
+        // Hide card area
+        document.getElementById('card-area').style.display = 'none';
+
+        const counterEl = document.getElementById('years-counter');
+        const yearText = currentYear === 1 ? uiTexts[lang].year : uiTexts[lang].in_system;
+
+        // The user requested exactly: "solo diciendo que sobreviste x cantidad de anos en el sistema"
+        if (lang === 'en') {
+             counterEl.innerHTML = `${uiTexts[lang].survived}<br/>${currentYear}<br/>${uiTexts[lang].in_system}`;
+        } else {
+             counterEl.innerHTML = `${uiTexts[lang].survived}<br/>${currentYear}<br/>${uiTexts[lang].in_system}`;
+        }
+
+        counterEl.classList.add('center-screen');
+
     } else if (state.milestones.work && state.milestones.court && state.milestones.greencard && state.milestones.citizen) {
         document.getElementById('modal-victory').classList.add('mostrar');
     }
@@ -1442,6 +1480,7 @@ function handleSwipe(dir) {
             decisionMsg = currentCard.left.msg ? (currentCard.left.msg[lang] || currentCard.left.msg['es']) : "";
         }
 
+        state.decisions++;
         clearPredictions();
 
         // Show result modal
@@ -1459,6 +1498,7 @@ function handleSwipe(dir) {
         }
     }
 
+    state.decisions++;
     clearPredictions();
     // Animate out
     cardEl.style.transform = `translate(${dir === 'right' ? '100vw' : '-100vw'}, 0) rotate(${dir === 'right' ? '30deg' : '-30deg'})`;
@@ -1470,7 +1510,10 @@ function handleSwipe(dir) {
 }
 
 function showResultModal(msg, callback) {
+    const lang = localStorage.getItem('limboLang') || 'es';
     const modal = document.getElementById('modal-resultado');
+
+    document.getElementById('resultado-titulo').textContent = uiTexts[lang].result;
     document.getElementById('resultado-texto').textContent = msg;
 
     // Translation Logic
@@ -1506,13 +1549,11 @@ async function loadNextCard() {
         initDB(); // Restart deck if empty
     }
 
-    // Order for milestones: work -> court -> greencard -> citizen
-    const milestoneOrder = ['work', 'court', 'greencard', 'citizen'];
-    const unachieved = milestoneOrder.map(msName => milestoneCards.find(card => card.milestone === msName)).filter(ms => ms && !state.milestones[ms.milestone]);
-
-    if (unachieved.length > 0 && Math.random() < (localStorage.getItem('limboDificultad') === 'easy' ? 0.40 : 0.25)) {
-        // Pick the first unachieved milestone in the chronological sequence
-        currentCard = unachieved[0];
+    // 25% chance to draw a milestone if unachieved ones exist
+    const unachieved = milestoneCards.filter(ms => !state.milestones[ms.milestone]);
+    if (unachieved.length > 0 && Math.random() < 0.25) {
+        // Pick a random unachieved milestone
+        currentCard = unachieved[Math.floor(Math.random() * unachieved.length)];
     } else {
         currentCard = deck.pop();
     }
@@ -1687,18 +1728,9 @@ initDB();
 updateUI();
 loadNextCard();
 
+
 // Buttons
 document.getElementById('btn-restart').addEventListener('click', () => location.reload());
+document.getElementById('btn-exit').addEventListener('click', () => window.location.href = 'index.html');
 document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());
-
-// --- Difficulty listener ---
-document.addEventListener('DOMContentLoaded', () => {
-    const diffSelector = document.getElementById('selector-dificultad');
-    if (diffSelector) {
-        const savedDiff = localStorage.getItem('limboDificultad') || 'normal';
-        diffSelector.value = savedDiff;
-        diffSelector.addEventListener('change', (e) => {
-            localStorage.setItem('limboDificultad', e.target.value);
-        });
-    }
-});
+document.getElementById('btn-victory-restart').addEventListener('click', () => location.reload());
