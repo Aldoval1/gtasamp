@@ -1,4 +1,32 @@
 
+
+const uiTexts = {
+    "en": {
+        "year": "Year",
+        "years": "Years",
+        "survived": "You survived",
+        "retry": "Try Again",
+        "reasons": {
+            "health": "Your health deteriorated completely under the weight of the system.",
+            "economy": "You ran out of money and could no longer afford to survive.",
+            "hope": "The endless limbo broke your spirit and you lost all hope.",
+            "security": "You were discovered and detained by immigration authorities."
+        }
+    },
+    "es": {
+        "year": "Año",
+        "years": "Años",
+        "survived": "Sobreviviste",
+        "retry": "Intentar de Nuevo",
+        "reasons": {
+            "health": "Tu salud se deterioró completamente bajo el peso del sistema.",
+            "economy": "Te quedaste sin dinero y ya no pudiste costear tu supervivencia.",
+            "hope": "El limbo interminable rompió tu espíritu y perdiste la esperanza.",
+            "security": "Fuiste descubierto y detenido por las autoridades migratorias."
+        }
+    }
+};
+
 let userApiKey = null;
 
 // --- Global State ---
@@ -8,6 +36,7 @@ let state = {
     hope: 50,
     security: 50,
     milestones: { work: false, court: false, greencard: false, citizen: false },
+    decisions: 0,
     aiEnabled: false
 };
 
@@ -1293,6 +1322,13 @@ function updateUI() {
     if (state.milestones.greencard) document.getElementById('ms-greencard').classList.add('achieved');
     if (state.milestones.citizen) document.getElementById('ms-citizen').classList.add('achieved');
 
+    const lang = localStorage.getItem('limboLang') || 'es';
+    const currentYear = Math.floor(state.decisions / 3);
+    const counterEl = document.getElementById('years-counter');
+    if (counterEl) {
+        counterEl.textContent = `${uiTexts[lang].year} ${currentYear}`;
+    }
+
     checkGameOver();
 }
 
@@ -1308,7 +1344,25 @@ function applyEffect(effect, isMilestone = null) {
 }
 
 function checkGameOver() {
-    if (state.health <= 0 || state.economy <= 0 || state.hope <= 0 || state.security <= 0) {
+    const lang = localStorage.getItem('limboLang') || 'es';
+    const currentYear = Math.floor(state.decisions / 3);
+
+    let reason = null;
+    if (state.health <= 0) reason = uiTexts[lang].reasons.health;
+    else if (state.economy <= 0) reason = uiTexts[lang].reasons.economy;
+    else if (state.hope <= 0) reason = uiTexts[lang].reasons.hope;
+    else if (state.security <= 0) reason = uiTexts[lang].reasons.security;
+
+    if (reason) {
+        const yearText = currentYear === 1 ? uiTexts[lang].year : uiTexts[lang].years;
+        const goYearsEl = document.getElementById('go-years');
+        const goReasonEl = document.getElementById('go-reason');
+        const restartBtn = document.getElementById('btn-restart');
+
+        if (goYearsEl) goYearsEl.textContent = `${uiTexts[lang].survived} ${currentYear} ${yearText}`;
+        if (goReasonEl) goReasonEl.textContent = reason;
+        if (restartBtn) restartBtn.textContent = uiTexts[lang].retry;
+
         document.getElementById('modal-gameover').classList.add('mostrar');
     } else if (state.milestones.work && state.milestones.court && state.milestones.greencard && state.milestones.citizen) {
         document.getElementById('modal-victory').classList.add('mostrar');
@@ -1427,6 +1481,7 @@ function handleSwipe(dir) {
             decisionMsg = currentCard.left.msg ? (currentCard.left.msg[lang] || currentCard.left.msg['es']) : "";
         }
 
+        state.decisions++;
         clearPredictions();
 
         // Show result modal
@@ -1444,6 +1499,7 @@ function handleSwipe(dir) {
         }
     }
 
+    state.decisions++;
     clearPredictions();
     // Animate out
     cardEl.style.transform = `translate(${dir === 'right' ? '100vw' : '-100vw'}, 0) rotate(${dir === 'right' ? '30deg' : '-30deg'})`;

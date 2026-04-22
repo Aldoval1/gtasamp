@@ -242,3 +242,36 @@ body {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
+
+/* Years Counter */
+.years-counter {
+    position: absolute;
+    bottom: 20px;
+    font-family: 'Barriecito', system-ui;
+    font-size: 2rem;
+    color: black;
+    z-index: 10;
+}
+
+/* Fullscreen White Modal for Game Over */
+.fullscreen-white {
+    background-color: white !important;
+}
+
+.fullscreen-white .gameover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    /* Hand drawn borders removed, just clean white filling the screen */
+}
+
+.fullscreen-white h2 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
