@@ -307,3 +307,23 @@ body {
 .btn-circular:hover {
     transform: scale(1.1);
 }
+
+.gameover-layout {
+    justify-content: flex-end;
+    padding-bottom: 20%;
+}
+
+.gameover-buttons {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .gameover-layout {
+        padding-bottom: 5%;
+    }
+    .gameover-buttons {
+        margin-top: 80px;
+    }
+}

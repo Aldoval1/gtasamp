@@ -48,6 +48,13 @@
 <option value="es">Español</option>
 </select>
 </div>
+<div class="opcion-grupo">
+<label id="label-dificultad">Difficulty</label>
+<select class="selector-idioma" id="selector-dificultad">
+<option value="normal">Normal</option>
+<option value="easy">Easy</option>
+</select>
+</div>
 </div>
 </div>
 </div>
@@ -415,6 +422,24 @@
                 bgMusic.play().catch(e => console.log('Autoplay prevent:', e));
                 musicaIniciada = true;
             }
+        });
+
+        // --- Modal Bibliografía ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnBibliography = document.getElementById('link-bibliography');
+            const contBibliography = document.getElementById('contenedor-bibliography');
+            const cerrarBibliography = document.getElementById('cerrar-bibliography');
+
+            btnBibliography.addEventListener('click', (e) => {
+                e.preventDefault();
+                contBibliography.classList.add('mostrar');
+                document.getElementById('footer-links').style.display = 'none';
+            });
+
+            cerrarBibliography.addEventListener('click', () => {
+                contBibliography.classList.remove('mostrar');
+                document.getElementById('footer-links').style.display = 'flex';
+            });
         });
 </script>
 
